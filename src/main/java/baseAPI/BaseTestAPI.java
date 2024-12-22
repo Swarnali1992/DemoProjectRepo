@@ -36,6 +36,25 @@ public class BaseTestAPI {
    // HttpClient for API testing
     public CloseableHttpClient httpClient;
 	
+    
+    /**
+     * Sets up the configuration for the API and WebDriver based on properties from a configuration file.
+     * 
+     * This method performs the following actions:
+     * 
+     *   Loads properties from a configuration file located at {@code "C:\\Users\\user\\eclipse-workspace\\DemoProject\\src\\main\\resources\\config.api.properties"}
+     *   Retrieves the base URL for the API and the browser configuration from the properties file.
+     *   Initializes HTTP clients using Apache HttpClient (default and custom clients).
+     * 
+     * 
+     * @throws FileNotFoundException If the specified configuration file cannot be found.
+     * @throws IOException If there is an error reading the configuration file or loading the properties.
+     * @return None
+     */
+    
+    
+     
+    
     @SuppressWarnings("deprecation")
 	@BeforeClass
     public void setup() throws FileNotFoundException, IOException {
@@ -52,6 +71,21 @@ public class BaseTestAPI {
              } 
  }
 
+    
+    /**
+     * Cleans up and releases resources after a test is completed.
+     * 
+     * This method performs the following actions:
+     * 
+     *   Quits the WebDriver session if it is still running, ensuring that the browser is properly closed.
+     *   Closes the Apache HttpClient if it is still open, releasing any associated resources.
+     * 
+     * 
+     * Any exceptions thrown during the cleanup process are caught and logged, ensuring that the test environment is cleaned up without affecting further execution.</p>
+     * @return None
+     */
+    
+    
     @AfterClass
     public void tearDown() {
         if (driver != null) {
@@ -67,6 +101,21 @@ public class BaseTestAPI {
         }
 	
     }
+    
+    
+    /**
+     * Sends an HTTP GET request to the specified URL and returns the response.
+     * 
+     * This method creates an HTTP GET request for the given URL, executes the request using an 
+     * Apache HttpClient instance, and returns the response in the form of {@link CloseableHttpResponse}.
+     * 
+     * @param url The URL to which the GET request will be sent. It must be a valid URL.
+     * @return CloseableHttpResponse The response of the HTTP GET request.
+     * @throws Exception If there is an error while creating the request, executing it, or processing the response.
+     * This could include network-related errors, invalid URLs, or issues with the HTTP client.
+     */
+    
+    
     
  // Utility method to send GET request
     @SuppressWarnings("deprecation")

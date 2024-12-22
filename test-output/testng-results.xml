@@ -1,29 +1,227 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-12-22T19:57:03 IST" name="Suite" finished-at="2024-12-22T19:57:06 IST" duration-ms="2674">
+  <suite started-at="2024-12-23T01:46:39 IST" name="Demo Project Automation Suite" finished-at="2024-12-23T01:47:18 IST" duration-ms="39191">
     <groups>
     </groups>
-    <test started-at="2024-12-22T19:57:03 IST" name="APITest" finished-at="2024-12-22T19:57:06 IST" duration-ms="2674">
+    <test started-at="2024-12-23T01:46:39 IST" name="Test" finished-at="2024-12-23T01:47:18 IST" duration-ms="39191">
+      <class name="testUI.EndToEndTest">
+        <test-method is-config="true" signature="beforeTest(java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:39 IST" name="beforeTest" finished-at="2024-12-23T01:46:51 IST" duration-ms="12246" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[dev]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:51 IST" name="beforeMethod" finished-at="2024-12-23T01:46:51 IST" duration-ms="33" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void testUI.EndToEndTest.verifyLogin() throws java.lang.InterruptedException,java.io.IOException]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[dev]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifyLogin()[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:51 IST" name="verifyLogin" finished-at="2024-12-23T01:46:54 IST" duration-ms="2643" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyLogin -->
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:54 IST" name="afterMethod" finished-at="2024-12-23T01:46:54 IST" duration-ms="8" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyLogin status=SUCCESS method=EndToEndTest.verifyLogin()[pri:0, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:54 IST" name="beforeMethod" finished-at="2024-12-23T01:46:54 IST" duration-ms="18" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void testUI.EndToEndTest.verifyAddProductToCart() throws java.io.IOException,java.lang.InterruptedException]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[dev]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifyAddProductToCart()[pri:1, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:54 IST" name="verifyAddProductToCart" finished-at="2024-12-23T01:47:05 IST" duration-ms="10595" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyAddProductToCart -->
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="afterMethod" finished-at="2024-12-23T01:47:05 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyAddProductToCart status=SUCCESS method=EndToEndTest.verifyAddProductToCart()[pri:1, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="beforeMethod" finished-at="2024-12-23T01:47:05 IST" duration-ms="37" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void testUI.EndToEndTest.verifyProductAddedToCart() throws java.lang.InterruptedException]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[dev]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifyProductAddedToCart()[pri:2, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="verifyProductAddedToCart" finished-at="2024-12-23T01:47:05 IST" duration-ms="171" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyProductAddedToCart -->
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="afterMethod" finished-at="2024-12-23T01:47:05 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyProductAddedToCart status=SUCCESS method=EndToEndTest.verifyProductAddedToCart()[pri:2, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="beforeMethod" finished-at="2024-12-23T01:47:05 IST" duration-ms="21" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void testUI.EndToEndTest.verifyCheckOutPageDetails() throws java.lang.InterruptedException,java.io.IOException]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[dev]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifyCheckOutPageDetails()[pri:3, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="verifyCheckOutPageDetails" finished-at="2024-12-23T01:47:16 IST" duration-ms="10986" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyCheckOutPageDetails -->
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:16 IST" name="afterMethod" finished-at="2024-12-23T01:47:16 IST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyCheckOutPageDetails status=SUCCESS method=EndToEndTest.verifyCheckOutPageDetails()[pri:3, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:16 IST" name="beforeMethod" finished-at="2024-12-23T01:47:16 IST" duration-ms="16" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void testUI.EndToEndTest.verifyCheckOutOverviewPageDetails() throws java.lang.InterruptedException]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[dev]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="verifyCheckOutOverviewPageDetails()[pri:4, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:16 IST" name="verifyCheckOutOverviewPageDetails" finished-at="2024-12-23T01:47:16 IST" duration-ms="218" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyCheckOutOverviewPageDetails -->
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:16 IST" name="afterMethod" finished-at="2024-12-23T01:47:16 IST" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=verifyCheckOutOverviewPageDetails status=SUCCESS method=EndToEndTest.verifyCheckOutOverviewPageDetails()[pri:4, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:17 IST" name="afterTest" finished-at="2024-12-23T01:47:18 IST" duration-ms="1597" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- testUI.EndToEndTest -->
       <class name="testAPI.RestAPITest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testAPI.RestAPITest@36d585c]" started-at="2024-12-22T19:57:03 IST" name="setup" finished-at="2024-12-22T19:57:04 IST" duration-ms="680" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:testAPI.RestAPITest@40cb8df7]" started-at="2024-12-23T01:47:16 IST" name="setup" finished-at="2024-12-23T01:47:16 IST" duration-ms="11" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="testGetUser()[pri:0, instance:testAPI.RestAPITest@36d585c]" started-at="2024-12-22T19:57:04 IST" name="testGetUser" finished-at="2024-12-22T19:57:05 IST" duration-ms="1151" status="PASS">
+        <test-method signature="testGetUser()[pri:0, instance:testAPI.RestAPITest@40cb8df7]" started-at="2024-12-23T01:47:16 IST" name="testGetUser" finished-at="2024-12-23T01:47:17 IST" duration-ms="464" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testGetUser -->
-        <test-method signature="testCreateUser()[pri:1, instance:testAPI.RestAPITest@36d585c]" started-at="2024-12-22T19:57:05 IST" name="testCreateUser" finished-at="2024-12-22T19:57:06 IST" duration-ms="739" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testCreateUser -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:testAPI.RestAPITest@36d585c]" started-at="2024-12-22T19:57:06 IST" name="tearDown" finished-at="2024-12-22T19:57:06 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testAPI.RestAPITest@40cb8df7]" started-at="2024-12-23T01:47:17 IST" name="tearDown" finished-at="2024-12-23T01:47:17 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- testAPI.RestAPITest -->
-    </test> <!-- APITest -->
-  </suite> <!-- Suite -->
+    </test> <!-- Test -->
+  </suite> <!-- Demo Project Automation Suite -->
 </testng-results>

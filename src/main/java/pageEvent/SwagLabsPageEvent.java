@@ -1,5 +1,6 @@
 package pageEvent;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -50,7 +51,7 @@ public class SwagLabsPageEvent {
 			  }
 
 	  
-	  public String fetchProductData() throws NumberFormatException {
+	  public String fetchProductData() throws NumberFormatException, IOException {
 		  ExcelUtils excelutil = new ExcelUtils(BaseTest.excelFilePath);
 			try {
 				searchProductData = excelutil.getCellData(sheetName,Integer.parseInt(BaseTest.rowNum), 0);

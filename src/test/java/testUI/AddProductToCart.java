@@ -54,7 +54,7 @@ public class AddProductToCart {
 	
 	
 	@Test(priority=2)
-	public void verifyCheckOutPageDetails() throws InterruptedException {
+	public void verifyCheckOutPageDetails() throws InterruptedException, NumberFormatException, IOException {
 		String pageTitle = checkoutPage.getCheckoutPageTitle();
 		System.out.println("Page Displayed : " +pageTitle);
 		checkoutPage.fetchContactInfo();

@@ -17,11 +17,6 @@
         <include name="verifyCheckOutOverviewPageDetails" />
         </methods>
        </class>
-       <class name="testAPI.RestAPITest">
-       <methods>
-        <include name="testGetUser"/>
-       </methods>
-        </class>
      </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

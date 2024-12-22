@@ -8,7 +8,24 @@ import org.openqa.selenium.WebElement;
 import base.BaseTest;
 
 public class IdentifyWebElement {
-	public WebElement getWebElement(String identifierType, String identifierValue)
+	
+	/**
+	 * Retrieves a single web element based on the provided identifier type and value.
+	 * 
+	 * This method allows you to find a web element on a web page using different locator strategies
+	 * such as XPath, CSS, Name, ID, Tag Name, Link Text, Partial Link Text, and Class Name. 
+	 * It supports dynamic identification of elements based on the provided type of locator.
+	 * 
+	 * @param identifierType The type of locator to use for identifying the element. Valid options are:
+	 *                       "XPATH", "CSS", "NAME", "ID", "TAGNAME", "LINKTEXT", "PARTIALLINKTEXT", "CLASSNAME".
+	 * @param identifierValue The value of the locator (e.g., the actual XPath expression or CSS selector).
+	 * @return The matching WebElement, or {@code null} if no matching element is found or if an invalid locator type is provided.
+	 * 
+	 * @throws IllegalArgumentException if an invalid identifier type is provided (i.e., not one of the valid options).
+	 */
+	
+	
+	public WebElement getWebElement(String identifierType, String identifierValue) throws IllegalArgumentException
 	{
 		switch(identifierType.toUpperCase()) {
 		case "XPATH":
@@ -31,7 +48,23 @@ public class IdentifyWebElement {
 			return null;
 	}	
 	}
-	public List<WebElement> getWebElements(String identifierType, String identifierValue)
+
+	/**
+	 * Retrieves a list of web elements based on the provided identifier type and value.
+	 * 
+	 * This method allows you to find multiple web elements on a web page using different locator strategies
+	 * such as XPath, CSS Selector, Name, ID, Tag Name, Link Text, or Partial Link Text. 
+	 * It supports dynamic identification of elements based on the provided type of locator.
+	 * 
+	 * @param identifierType The type of locator to use for identifying the elements. Valid options are:
+	 *                       "XPATH", "CSS", "NAME", "ID", "TAGNAME", "LINKTEXT", "PARTIALLINKTEXT".
+	 * @param identifierValue The value of the locator (e.g., the actual XPath expression or CSS selector).
+	 * @return A list of matching WebElements, or {@code null} if no matching elements are found or if an invalid locator type is provided.
+	 * 
+	 * @throws IllegalArgumentException if an invalid identifier type is provided (i.e., not one of the valid options).
+	 */
+	
+	public List<WebElement> getWebElements(String identifierType, String identifierValue) throws IllegalArgumentException
 	{
 		switch(identifierType.toUpperCase()) {
 		case "XPATH":

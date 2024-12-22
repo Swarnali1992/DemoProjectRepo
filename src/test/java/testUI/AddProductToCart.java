@@ -40,9 +40,9 @@ public class AddProductToCart {
 	}
 	
 	@Test(priority=1)
-	public void verifyProductAddedToCart() throws InterruptedException {
+	public void verifyProductAddedToCart(WebDriver driver) throws InterruptedException {
 		
-		String productInCartPageTitle = cartPage.productInCart();
+		String productInCartPageTitle = cartPage.productInCart(driver);
 		if(productInCartPageTitle.equalsIgnoreCase(productInCartTitle)) {
 			System.out.println("Same Product Added in Cart");
 			cartPage.clickCheckOut();

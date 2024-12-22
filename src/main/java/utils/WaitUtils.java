@@ -13,7 +13,7 @@ public class WaitUtils {
 	 * @param driver The WebDriver instance used to interact with the browser. It is used to initiate the wait.
 	 * @param element The WebElement that needs to become visible. The method waits for this element
 	 *                to be present in the DOM and have a non-zero size.
-	 * @param i The maximum duration to wait for the element to become visible. If the element does not become visible
+	 * @param timeoutInSeconds The maximum duration to wait for the element to become visible. If the element does not become visible
 	 *          within this duration, a {@link org.openqa.selenium.TimeoutException} will be thrown.
 	 * 
 	 * @return The WebElement that became visible. This element is returned when it becomes visible in the browser.
@@ -22,9 +22,9 @@ public class WaitUtils {
 	 * 
 	 */
 	
-	  public static WebElement waitForVisibility(WebDriver driver, WebElement element, Duration i) {
-	        WebDriverWait wait = new WebDriverWait(driver, i);
-	        return wait.until(ExpectedConditions.visibilityOf(element));
+	  public static WebElement waitForVisibility(WebDriver driver, WebElement element, int timeoutInSeconds) {
+		  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+          return wait.until(ExpectedConditions.visibilityOf(element));
 	    }
 
 	  /**

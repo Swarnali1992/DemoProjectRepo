@@ -15,6 +15,7 @@ import pageEvent.SwagLabsPageEvent;
 import utils.ElementUtils;
 import utils.ExcelUtils;
 import utils.IdentifyWebElement;
+import utils.WaitUtils;
 
 public class EndToEndTest extends BaseTest {
 	IdentifyWebElement ele = new IdentifyWebElement();
@@ -120,7 +121,7 @@ public class EndToEndTest extends BaseTest {
   
 	@Test(priority=2)
 	public void verifyProductAddedToCart() throws InterruptedException {
-		String productInCartPageTitle = cartPage.productInCart();
+		String productInCartPageTitle = cartPage.productInCart(driver);
 		logger.info("Product displayed in cart : " +productInCartPageTitle);
 		logger.info("Search for the added Product in the Cart page.");
 		if(productInCartPageTitle.equalsIgnoreCase(productInCartTitle)) {
@@ -223,6 +224,8 @@ public class EndToEndTest extends BaseTest {
 		Assert.assertEquals(actualPageTitle, expectedPageTitle, message);
 		checkoutOverviewPage.clickFinishBtn();
 		logger.info("Clicked on Finish button.");
+		
+	
 		}
 		catch (InterruptedException e) {
 			// TODO Auto-generated catch block

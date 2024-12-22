@@ -92,7 +92,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">6 methods,   6 passed</span>
+                    <span class="method-stats">5 methods,   5 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -101,11 +101,6 @@
                       <a href="#" panel-name="suite-Demo_Project_Automation_Suite" class="show-methods passed suite-Demo_Project_Automation_Suite"> (show)</a> <!-- show-methods passed suite-Demo_Project_Automation_Suite -->
                     </span>
                     <div class="method-list-content passed suite-Demo_Project_Automation_Suite">
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Demo_Project_Automation_Suite" title="testAPI.RestAPITest" class="method navigator-link" hash-for-method="testGetUser">testGetUser</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-Demo_Project_Automation_Suite" title="testUI.EndToEndTest" class="method navigator-link" hash-for-method="verifyAddProductToCart">verifyAddProductToCart</a> <!-- method navigator-link -->
@@ -143,21 +138,6 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Demo_Project_Automation_Suite" class="panel Demo_Project_Automation_Suite">
-          <div class="suite-Demo_Project_Automation_Suite-class-passed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
-              <span class="class-name">testAPI.RestAPITest</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="testGetUser">
-                  </a> <!-- testGetUser -->
-                  <span class="method-name">testGetUser</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Demo_Project_Automation_Suite-class-passed -->
           <div class="suite-Demo_Project_Automation_Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -227,11 +207,6 @@
           &lt;include name=&quot;verifyCheckOutOverviewPageDetails&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- testUI.EndToEndTest --&gt;
-      &lt;class name=&quot;testAPI.RestAPITest&quot;&gt;
-        &lt;methods&gt;
-          &lt;include name=&quot;testGetUser&quot;/&gt;
-        &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- testAPI.RestAPITest --&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Test --&gt;
 &lt;/suite&gt; &lt;!-- Demo Project Automation Suite --&gt;
@@ -245,7 +220,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Test (2 classes)</span>
+                <span class="test-name">Test (1 class)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -271,31 +246,27 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(6);
+data.addRows(5);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'verifyCheckOutPageDetails')
 data.setCell(0, 2, 'testUI.EndToEndTest')
-data.setCell(0, 3, 10986);
+data.setCell(0, 3, 10925);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'verifyAddProductToCart')
 data.setCell(1, 2, 'testUI.EndToEndTest')
-data.setCell(1, 3, 10595);
+data.setCell(1, 3, 10728);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'verifyLogin')
 data.setCell(2, 2, 'testUI.EndToEndTest')
-data.setCell(2, 3, 2643);
+data.setCell(2, 3, 3069);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'testGetUser')
-data.setCell(3, 2, 'testAPI.RestAPITest')
-data.setCell(3, 3, 464);
+data.setCell(3, 1, 'verifyCheckOutOverviewPageDetails')
+data.setCell(3, 2, 'testUI.EndToEndTest')
+data.setCell(3, 3, 227);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'verifyCheckOutOverviewPageDetails')
+data.setCell(4, 1, 'verifyProductAddedToCart')
 data.setCell(4, 2, 'testUI.EndToEndTest')
-data.setCell(4, 3, 218);
-data.setCell(5, 0, 5)
-data.setCell(5, 1, 'verifyProductAddedToCart')
-data.setCell(5, 2, 'testUI.EndToEndTest')
-data.setCell(5, 3, 171);
+data.setCell(4, 3, 206);
 window.suiteTableData['Demo_Project_Automation_Suite']= { tableData: data, tableDiv: 'times-div-Demo_Project_Automation_Suite'}
 return data;
 }
@@ -315,16 +286,9 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Demo_Project_Automation_Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">1 ignored method</span>
+            <span class="header-content">0 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
-            <div class="ignored-class-div">
-              <span class="ignored-class-name">testAPI.RestAPITest</span>
-              <div class="ignored-methods-div">
-                <span class="ignored-method-name">testCreateUser</span>
-                <br/>
-              </div> <!-- ignored-methods-div -->
-            </div> <!-- ignored-class-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="chronological-Demo_Project_Automation_Suite" class="panel">
@@ -340,85 +304,67 @@ return data;
               </div> <!-- configuration-test before -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethod(public void testUI.EndToEndTest.verifyLogin() throws java.lang.InterruptedException,java.io.IOExcept...)</span>
-                <span class="method-start">12292 ms</span>
+                <span class="method-start">10128 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">verifyLogin</span>
-                <span class="method-start">12327 ms</span>
+                <span class="method-start">10310 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">afterMethod([TestResult name=verifyLogin status=SUCCESS method=EndToEndTest.verifyLogin()[pri:0, instance:testUI...)</span>
-                <span class="method-start">14976 ms</span>
+                <span class="method-start">13390 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethod(public void testUI.EndToEndTest.verifyAddProductToCart() throws java.io.IOException,java.lang.Interr...)</span>
-                <span class="method-start">14990 ms</span>
+                <span class="method-start">13409 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">verifyAddProductToCart</span>
-                <span class="method-start">15008 ms</span>
+                <span class="method-start">13502 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">afterMethod([TestResult name=verifyAddProductToCart status=SUCCESS method=EndToEndTest.verifyAddProductToCart()[...)</span>
-                <span class="method-start">25607 ms</span>
+                <span class="method-start">24237 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethod(public void testUI.EndToEndTest.verifyProductAddedToCart() throws java.lang.InterruptedException, ch...)</span>
-                <span class="method-start">25614 ms</span>
+                <span class="method-start">24251 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">verifyProductAddedToCart</span>
-                <span class="method-start">25651 ms</span>
+                <span class="method-start">24267 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">afterMethod([TestResult name=verifyProductAddedToCart status=SUCCESS method=EndToEndTest.verifyProductAddedToCar...)</span>
-                <span class="method-start">25827 ms</span>
+                <span class="method-start">24496 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethod(public void testUI.EndToEndTest.verifyCheckOutPageDetails() throws java.lang.InterruptedException,ja...)</span>
-                <span class="method-start">25839 ms</span>
+                <span class="method-start">24499 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">verifyCheckOutPageDetails</span>
-                <span class="method-start">25861 ms</span>
+                <span class="method-start">24518 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">afterMethod([TestResult name=verifyCheckOutPageDetails status=SUCCESS method=EndToEndTest.verifyCheckOutPageDeta...)</span>
-                <span class="method-start">36851 ms</span>
+                <span class="method-start">35448 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-method before">
                 <span class="method-name">beforeMethod(public void testUI.EndToEndTest.verifyCheckOutOverviewPageDetails() throws java.lang.InterruptedExce...)</span>
-                <span class="method-start">36855 ms</span>
+                <span class="method-start">35452 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">verifyCheckOutOverviewPageDetails</span>
-                <span class="method-start">36871 ms</span>
+                <span class="method-start">35466 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">afterMethod([TestResult name=verifyCheckOutOverviewPageDetails status=SUCCESS method=EndToEndTest.verifyCheckOut...)</span>
-                <span class="method-start">37093 ms</span>
+                <span class="method-start">35696 ms</span>
               </div> <!-- configuration-method after -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">testAPI.RestAPITest</div> <!-- chronological-class-name -->
-              <div class="configuration-class before">
-                <span class="method-name">setup</span>
-                <span class="method-start">37095 ms</span>
-              </div> <!-- configuration-class before -->
-              <div class="test-method">
-                <span class="method-name">testGetUser</span>
-                <span class="method-start">37106 ms</span>
-              </div> <!-- test-method -->
-              <div class="configuration-class after">
-                <span class="method-name">tearDown</span>
-                <span class="method-start">37574 ms</span>
-              </div> <!-- configuration-class after -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">testUI.EndToEndTest</div> <!-- chronological-class-name -->
               <div class="configuration-test after">
                 <span class="method-name">afterTest</span>
-                <span class="method-start">37576 ms</span>
+                <span class="method-start">35698 ms</span>
               </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

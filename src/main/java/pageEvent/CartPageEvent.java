@@ -12,21 +12,18 @@ public class CartPageEvent {
 	IdentifyWebElement ele = new IdentifyWebElement();
 	
 	/**
-	 * Retrieves the product title displayed in the Cart page.
+	 * Retrieves the title of the product displayed in the cart.
+	 * This method waits for the visibility of the product element in the cart 
+	 * and then extracts its text. The product title is returned as a string.
 	 * 
-	 * This method locates the product title in the Cart page using its XPath (specified in the 
-	 * {@link CartPageObject} class), extracts the text of the product, and returns it. The text 
-	 * returned represents the title of the product that has been added to the shopping cart.
-	 * 
-	 * The method also logs the product title to the console for debugging purposes.
-	 * 
-	 * @return The title of the product displayed in the Cart.
-	 * @throws NoSuchElementException If the product title element is not found on the Cart page.
-	 * @throws WebDriverException If the WebDriver is unable to interact with the product title element.
-	 * @return None
+	 * @param driver The WebDriver instance used to interact with the browser.
+	 * @return A string representing the product title displayed in the cart.
+	 * @throws NoSuchElementException if the product element cannot be found on the page.
+	 * @throws WebDriverException if an error occurs while interacting with the WebDriver.
 	 * 
 	 */
-	public String productInCart() throws NoSuchElementException, WebDriverException{
+	public String productInCart(WebDriver driver) throws NoSuchElementException, WebDriverException{
+		WaitUtils.waitForVisibility(driver, ele.getWebElement("XPATH", CartPageObject.productTitle), 5000);
 		String productCart = ele.getWebElement("XPATH", CartPageObject.productTitle).getText();
 		System.out.println(productCart);
 		return productCart;

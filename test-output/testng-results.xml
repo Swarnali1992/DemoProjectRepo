@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-12-23T01:46:39 IST" name="Demo Project Automation Suite" finished-at="2024-12-23T01:47:18 IST" duration-ms="39191">
+  <suite started-at="2024-12-23T02:16:59 IST" name="Demo Project Automation Suite" finished-at="2024-12-23T02:17:35 IST" duration-ms="36910">
     <groups>
     </groups>
-    <test started-at="2024-12-23T01:46:39 IST" name="Test" finished-at="2024-12-23T01:47:18 IST" duration-ms="39191">
+    <test started-at="2024-12-23T02:16:59 IST" name="Test" finished-at="2024-12-23T02:17:35 IST" duration-ms="36910">
       <class name="testUI.EndToEndTest">
-        <test-method is-config="true" signature="beforeTest(java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:39 IST" name="beforeTest" finished-at="2024-12-23T01:46:51 IST" duration-ms="12246" status="PASS">
+        <test-method is-config="true" signature="beforeTest(java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:16:59 IST" name="beforeTest" finished-at="2024-12-23T02:17:09 IST" duration-ms="10049" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -23,7 +23,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:51 IST" name="beforeMethod" finished-at="2024-12-23T01:46:51 IST" duration-ms="33" status="PASS">
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:09 IST" name="beforeMethod" finished-at="2024-12-23T02:17:09 IST" duration-ms="181" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -44,22 +44,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="verifyLogin()[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:51 IST" name="verifyLogin" finished-at="2024-12-23T01:46:54 IST" duration-ms="2643" status="PASS">
+        <test-method signature="verifyLogin()[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:09 IST" name="verifyLogin" finished-at="2024-12-23T02:17:12 IST" duration-ms="3069" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyLogin -->
-        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:54 IST" name="afterMethod" finished-at="2024-12-23T01:46:54 IST" duration-ms="8" status="PASS">
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:12 IST" name="afterMethod" finished-at="2024-12-23T02:17:12 IST" duration-ms="13" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyLogin status=SUCCESS method=EndToEndTest.verifyLogin()[pri:0, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+                <![CDATA[[TestResult name=verifyLogin status=SUCCESS method=EndToEndTest.verifyLogin()[pri:0, instance:testUI.EndToEndTest@53aad5d5] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:54 IST" name="beforeMethod" finished-at="2024-12-23T01:46:54 IST" duration-ms="18" status="PASS">
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:12 IST" name="beforeMethod" finished-at="2024-12-23T02:17:12 IST" duration-ms="92" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -80,22 +80,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="verifyAddProductToCart()[pri:1, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:46:54 IST" name="verifyAddProductToCart" finished-at="2024-12-23T01:47:05 IST" duration-ms="10595" status="PASS">
+        <test-method signature="verifyAddProductToCart()[pri:1, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:12 IST" name="verifyAddProductToCart" finished-at="2024-12-23T02:17:23 IST" duration-ms="10728" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyAddProductToCart -->
-        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="afterMethod" finished-at="2024-12-23T01:47:05 IST" duration-ms="4" status="PASS">
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:23 IST" name="afterMethod" finished-at="2024-12-23T02:17:23 IST" duration-ms="6" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyAddProductToCart status=SUCCESS method=EndToEndTest.verifyAddProductToCart()[pri:1, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+                <![CDATA[[TestResult name=verifyAddProductToCart status=SUCCESS method=EndToEndTest.verifyAddProductToCart()[pri:1, instance:testUI.EndToEndTest@53aad5d5] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="beforeMethod" finished-at="2024-12-23T01:47:05 IST" duration-ms="37" status="PASS">
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:23 IST" name="beforeMethod" finished-at="2024-12-23T02:17:23 IST" duration-ms="15" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -116,22 +116,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="verifyProductAddedToCart()[pri:2, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="verifyProductAddedToCart" finished-at="2024-12-23T01:47:05 IST" duration-ms="171" status="PASS">
+        <test-method signature="verifyProductAddedToCart()[pri:2, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:23 IST" name="verifyProductAddedToCart" finished-at="2024-12-23T02:17:23 IST" duration-ms="206" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyProductAddedToCart -->
-        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="afterMethod" finished-at="2024-12-23T01:47:05 IST" duration-ms="4" status="PASS">
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:23 IST" name="afterMethod" finished-at="2024-12-23T02:17:23 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyProductAddedToCart status=SUCCESS method=EndToEndTest.verifyProductAddedToCart()[pri:2, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+                <![CDATA[[TestResult name=verifyProductAddedToCart status=SUCCESS method=EndToEndTest.verifyProductAddedToCart()[pri:2, instance:testUI.EndToEndTest@53aad5d5] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="beforeMethod" finished-at="2024-12-23T01:47:05 IST" duration-ms="21" status="PASS">
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:23 IST" name="beforeMethod" finished-at="2024-12-23T02:17:23 IST" duration-ms="19" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -152,22 +152,22 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="verifyCheckOutPageDetails()[pri:3, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:05 IST" name="verifyCheckOutPageDetails" finished-at="2024-12-23T01:47:16 IST" duration-ms="10986" status="PASS">
+        <test-method signature="verifyCheckOutPageDetails()[pri:3, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:23 IST" name="verifyCheckOutPageDetails" finished-at="2024-12-23T02:17:34 IST" duration-ms="10925" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyCheckOutPageDetails -->
-        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:16 IST" name="afterMethod" finished-at="2024-12-23T01:47:16 IST" duration-ms="2" status="PASS">
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:34 IST" name="afterMethod" finished-at="2024-12-23T02:17:34 IST" duration-ms="2" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyCheckOutPageDetails status=SUCCESS method=EndToEndTest.verifyCheckOutPageDetails()[pri:3, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+                <![CDATA[[TestResult name=verifyCheckOutPageDetails status=SUCCESS method=EndToEndTest.verifyCheckOutPageDetails()[pri:3, instance:testUI.EndToEndTest@53aad5d5] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:16 IST" name="beforeMethod" finished-at="2024-12-23T01:47:16 IST" duration-ms="16" status="PASS">
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method,java.lang.String,java.lang.String)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:34 IST" name="beforeMethod" finished-at="2024-12-23T02:17:34 IST" duration-ms="14" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -188,40 +188,26 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeMethod -->
-        <test-method signature="verifyCheckOutOverviewPageDetails()[pri:4, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:16 IST" name="verifyCheckOutOverviewPageDetails" finished-at="2024-12-23T01:47:16 IST" duration-ms="218" status="PASS">
+        <test-method signature="verifyCheckOutOverviewPageDetails()[pri:4, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:34 IST" name="verifyCheckOutOverviewPageDetails" finished-at="2024-12-23T02:17:34 IST" duration-ms="227" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyCheckOutOverviewPageDetails -->
-        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:16 IST" name="afterMethod" finished-at="2024-12-23T01:47:16 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:34 IST" name="afterMethod" finished-at="2024-12-23T02:17:34 IST" duration-ms="1" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=verifyCheckOutOverviewPageDetails status=SUCCESS method=EndToEndTest.verifyCheckOutOverviewPageDetails()[pri:4, instance:testUI.EndToEndTest@5136d012] output={null}]]]>
+                <![CDATA[[TestResult name=verifyCheckOutOverviewPageDetails status=SUCCESS method=EndToEndTest.verifyCheckOutOverviewPageDetails()[pri:4, instance:testUI.EndToEndTest@53aad5d5] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method is-config="true" signature="afterTest()[pri:0, instance:testUI.EndToEndTest@5136d012]" started-at="2024-12-23T01:47:17 IST" name="afterTest" finished-at="2024-12-23T01:47:18 IST" duration-ms="1597" status="PASS">
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:testUI.EndToEndTest@53aad5d5]" started-at="2024-12-23T02:17:34 IST" name="afterTest" finished-at="2024-12-23T02:17:35 IST" duration-ms="1184" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->
       </class> <!-- testUI.EndToEndTest -->
-      <class name="testAPI.RestAPITest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testAPI.RestAPITest@40cb8df7]" started-at="2024-12-23T01:47:16 IST" name="setup" finished-at="2024-12-23T01:47:16 IST" duration-ms="11" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="testGetUser()[pri:0, instance:testAPI.RestAPITest@40cb8df7]" started-at="2024-12-23T01:47:16 IST" name="testGetUser" finished-at="2024-12-23T01:47:17 IST" duration-ms="464" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testGetUser -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:testAPI.RestAPITest@40cb8df7]" started-at="2024-12-23T01:47:17 IST" name="tearDown" finished-at="2024-12-23T01:47:17 IST" duration-ms="1" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- testAPI.RestAPITest -->
     </test> <!-- Test -->
   </suite> <!-- Demo Project Automation Suite -->
 </testng-results>

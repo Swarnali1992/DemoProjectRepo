@@ -25,6 +25,8 @@ public class IdentifyWebElement {
 			return BaseTest.driver.findElement(By.linkText(identifierValue));
 		case "PARTIALLINKTEXT":
 			return BaseTest.driver.findElement(By.partialLinkText(identifierValue));
+		case "CLASSNAME":
+			return BaseTest.driver.findElement(By.className(identifierValue));
 		default:
 			return null;
 	}	

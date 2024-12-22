@@ -1,5 +1,7 @@
 package pageEvent;
 
+import java.io.IOException;
+
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -17,7 +19,7 @@ public class LoginPageEvent {
 	String username;
 	String password;
 	
-	public void fetchLoginData() {
+	public void fetchLoginData() throws IOException {
 //		rowNum = ConfigReaderUtils.getProperty("excelrownum");
 //		System.out.println("Test Data should be fetched from row number : " + rowNum);
 		ExcelUtils excelutil = new ExcelUtils(BaseTest.excelFilePath);
@@ -27,17 +29,11 @@ public class LoginPageEvent {
 		System.out.println("Password : " + password);
 	}
 	
-	  public void enterLoginInfo(){
-		//  int rowCount = excelutil.getRowCount(sheetName);
-//		  for(int rowNum = 1; rowNum <= rowCount; rowNum++)
-//		  {
-//			  String password = excelutil.getCellDataByColName(sheetName, rowNum, "Password");
-//			  System.out.println("Password: " + password);
-//		  }
+	public void enterLoginInfo() throws InterruptedException {
 	  ele.getWebElement("ID", LoginPageObject.username).click();
 	  ele.getWebElement("ID", LoginPageObject.username).sendKeys(username); 
 	  ele.getWebElement("ID", LoginPageObject.password).click();
-	  ele.getWebElement("ID", LoginPageObject.password).sendKeys("password");
+	  ele.getWebElement("ID", LoginPageObject.password).sendKeys(password);
 	  ele.getWebElement("ID",LoginPageObject.loginBtn).click(); 
 	  }
 
@@ -50,7 +46,7 @@ public class LoginPageEvent {
 		Assert.assertTrue(ele.getWebElements("ID", LoginPageObject.loginBtn).size()>0, " Login Page not displayed. ");
 	}
 	
-	public void loginBtn() {
+	public void clickLoginBtn()throws InterruptedException  {
 		ele.getWebElement("ID", LoginPageObject.loginBtn).click();
 	}
 	

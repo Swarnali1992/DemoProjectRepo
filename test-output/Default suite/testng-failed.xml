@@ -5,11 +5,11 @@
     <classes>
       <class name="testUI.LoginPageTest">
         <methods>
-          <include name="afterMethod"/>
           <include name="beforeTest"/>
+          <include name="afterMethod"/>
           <include name="afterTest"/>
           <include name="beforeMethod"/>
-          <include name="loginTest"/>
+          <include name="verifyProductAddedToCart"/>
         </methods>
       </class> <!-- testUI.LoginPageTest -->
     </classes>

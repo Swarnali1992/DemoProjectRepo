@@ -26,33 +26,25 @@ public static WebDriver driver;
 public ExtentSparkReporter sparkReporter;
 public ExtentReports extent;
 public ExtentTest logger;
-CaptureRequest captureRequest = new CaptureRequest();
 public String baseURL;
 public static String dbName;
 public static String excelName; 
 public static String excelFilePath;
 public static String rowNum;
-
+CaptureRequest captureRequest = new CaptureRequest();
 
 	@BeforeTest
-	public void beforeTest(){
-		sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + File.separator+"reports"+File.separator+"Swar");
-		extent = new ExtentReports();
-		extent.attachReporter(sparkReporter);
-		sparkReporter.config().setTheme(Theme.DARK);
-		extent.setSystemInfo("HostName", "Swar");
-		extent.setSystemInfo("Username", "Prithu");
-		sparkReporter.config().setDocumentTitle("Automation Report");
-		sparkReporter.config().setReportName("Automation Test Results by Swarnali Lahiri ");
-	}
-	
-	@BeforeMethod
 	@Parameters({"browser","env"})
-	public void beforeMethod(Method testMethod, String browser, String env) {
-		logger=extent.createTest(testMethod.getName());
-		System.out.println(testMethod);
+	public void beforeTest(String browser, String env){
 		setUpDriver(browser);
 		captureRequest.captureHttpRequest(driver, browser);
+		ConfigReaderUtils.loadProperties(env);
+		System.out.println("Running in environment : " +env);
+		baseURL = ConfigReaderUtils.getProperty("baseurl");
+		System.out.println("URL launched : " + baseURL);
+		driver.get(baseURL);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(2000, TimeUnit.SECONDS);
 		ConfigReaderUtils.loadProperties(env);
 		System.out.println("Running in environment : " +env);
 		baseURL = ConfigReaderUtils.getProperty("baseurl");
@@ -65,9 +57,38 @@ public static String rowNum;
 		System.out.println("Test Data Excel is stored in the path : " + excelFilePath);
 		rowNum = ConfigReaderUtils.getProperty("excelrownum");
 		System.out.println("Test Data should be fetched from row number : " + rowNum);
-		driver.get(baseURL);
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(2000, TimeUnit.SECONDS);
+		sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + File.separator+"reports"+File.separator+"DemoProject");
+		extent = new ExtentReports();
+		extent.attachReporter(sparkReporter);
+		sparkReporter.config().setTheme(Theme.DARK);
+		extent.setSystemInfo("HostName", "Machine Swarnali");
+		extent.setSystemInfo("Username", "Swarnali");
+		sparkReporter.config().setDocumentTitle("Automation Report of Demo Project");
+		sparkReporter.config().setReportName("Automation Test Results by Swarnali Lahiri ");
+	}
+	
+	@BeforeMethod
+	@Parameters({"browser","env"})
+	public void beforeMethod(Method testMethod, String browser, String env) {
+		logger=extent.createTest(testMethod.getName());
+		System.out.println("The Test Method executing :   "  +testMethod);
+		//setUpDriver(browser);
+		captureRequest.captureHttpRequest(driver, browser);
+//		ConfigReaderUtils.loadProperties(env);
+//		System.out.println("Running in environment : " +env);
+//		baseURL = ConfigReaderUtils.getProperty("baseurl");
+//		System.out.println("URL launched : " + baseURL);
+//		dbName = ConfigReaderUtils.getProperty("database");
+//		System.out.println("Database Name : " + dbName);
+//		excelName = ConfigReaderUtils.getProperty("excelfilename");
+//		System.out.println("Test Data retrieved from Excel : " + excelName);
+//		excelFilePath = ConfigReaderUtils.getProperty("excelfilepath");
+//		System.out.println("Test Data Excel is stored in the path : " + excelFilePath);
+//		rowNum = ConfigReaderUtils.getProperty("excelrownum");
+//		System.out.println("Test Data should be fetched from row number : " + rowNum);
+//		driver.get(baseURL);
+//		driver.manage().window().maximize();
+//		driver.manage().timeouts().implicitlyWait(2000, TimeUnit.SECONDS);
 }
 	
 	public void setUpDriver(String browser){
@@ -83,6 +104,9 @@ public static String rowNum;
 			WebDriverManager.edgedriver().setup();
 			driver=new EdgeDriver();	
 		}
+		else{
+            throw new RuntimeException("Unsupported browser: " + browser);
+        }
 		
 	}
 	

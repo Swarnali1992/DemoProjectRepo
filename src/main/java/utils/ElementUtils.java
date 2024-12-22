@@ -1,12 +1,20 @@
 package utils;
 
+import java.util.List;
 import java.util.Set;
-
+import utils.IdentifyWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import pageEvent.SwagLabsPageEvent;
+import pageObject.SwagLabsPageObject;
+
 public class ElementUtils {
+	IdentifyWebElement ele = new IdentifyWebElement();
+	
+	SwagLabsPageEvent swagLabsPage = new SwagLabsPageEvent();
 	  public static void click(WebElement element) {
 	        element.click();
 	    }
@@ -60,6 +68,18 @@ public class ElementUtils {
 	    	}
 	    }
 	    
+	    public void selectSubMenu(String selectedSubMenu) {
+	    	List<WebElement> subMenu = ele.getWebElements("XPATH", SwagLabsPageObject.subMenuOptions);
+	    	for(WebElement sbmenu: subMenu) {
+	  		  String subMenuName = sbmenu.getText();
+	  		  if(subMenuName.equalsIgnoreCase(selectedSubMenu))
+	  		  {
+	  			sbmenu.click();
+	  			System.out.println("On About 1 page");
+	  		  }
+	  	  }
+	    }
 	    
-
+	 
+	   
 }

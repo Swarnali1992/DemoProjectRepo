@@ -13,15 +13,16 @@ public class NetworkHandler {
 
     public void captureNetworkRequest() {
         devTools.addListener(Network.requestWillBeSent(), request -> {
-            System.out.println("Request URL: " + request.getRequest().getUrl());
-            System.out.println("Request Method: " + request.getRequest().getMethod());
+        	
+//            System.out.println("Request URL: " + request.getRequest().getUrl());
+           // System.out.println("Request Method: " + request.getRequest().getMethod());
         });
     }
 
     public void captureNetworkResponse() {
         devTools.addListener(Network.responseReceived(), response -> {
-            System.out.println("Response URL: " + response.getResponse().getUrl());
-            System.out.println("Status Code: " + response.getResponse().getStatus());
+//            System.out.println("Response URL: " + response.getResponse().getUrl());
+//            System.out.println("Status Code: " + response.getResponse().getStatus());
         });
     }
     

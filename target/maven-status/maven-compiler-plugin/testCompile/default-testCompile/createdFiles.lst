@@ -1,0 +1,5 @@
+testAPI\APITest.class
+testPerformance\PerformanceTest.class
+testUI\LoginPageTest.class
+testUI\OpenMenuTest.class
+testUI\DatabaseTest.class

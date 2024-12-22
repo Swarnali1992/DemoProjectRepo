@@ -8,20 +8,13 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="env" value="dev"/>
     <classes>
-      <class name="testUI.LoginPageTest">
+      <class name="testAPI.RestAPITest">
         <methods>
-          <include name="afterMethod"/>
-          <include name="beforeTest"/>
-          <include name="afterTest"/>
-          <include name="beforeMethod"/>
-          <include name="loginTest"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="testGetUser"/>
         </methods>
-      </class> <!-- testUI.LoginPageTest -->
-      <class name="testUI.OpenMenuTest">
-        <methods>
-          <include name="openMenu"/>
-        </methods>
-      </class> <!-- testUI.OpenMenuTest -->
+      </class> <!-- testAPI.RestAPITest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Demo Project Automation Suite] -->

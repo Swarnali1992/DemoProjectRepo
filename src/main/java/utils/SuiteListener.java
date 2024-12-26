@@ -28,10 +28,15 @@ public class SuiteListener implements ITestListener, IAnnotationTransformer{
 	 * @throws IOException If there is an issue with file I/O operations (e.g., saving the screenshot file).
 	 */
 	
-	public void onTestFailure(ITestListener result) throws IOException {		
+	public void onTestFailure(ITestListener result) throws IOException {	
+		try {
 		String filename=System.getProperty("user.dir")+File.separator+"screenshots"+File.separator+((ITestResult) result).getMethod().getMethodName();
 		File srcFile = ((TakesScreenshot)BaseTest.driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(srcFile, new File (filename + ".png"));	
+		}catch (IOException e) {
+            System.err.println("Failed to capture screenshot: " + e.getMessage());
+            e.printStackTrace();
+        }
 	}
 	/**
 	 * This method is used to modify the behavior of a test method in TestNG.

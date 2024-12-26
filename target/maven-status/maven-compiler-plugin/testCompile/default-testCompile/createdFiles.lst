@@ -1,5 +1,6 @@
-testAPI\APITest.class
+testAPI\NetworkAPITest.class
 testPerformance\PerformanceTest.class
-testUI\LoginPageTest.class
-testUI\OpenMenuTest.class
+testUI\AddProductToCart.class
 testUI\DatabaseTest.class
+testUI\EndToEndTest.class
+testAPI\RestAPITest.class

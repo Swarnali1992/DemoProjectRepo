@@ -1,6 +1,11 @@
 package testUI;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
@@ -12,9 +17,12 @@ import pageEvent.CheckoutOverviewPageEvent;
 import pageEvent.CheckoutPageEvent;
 import pageEvent.LoginPageEvent;
 import pageEvent.SwagLabsPageEvent;
+import utils.CaptureRequest;
+import utils.DatabaseUtils;
 import utils.ElementUtils;
 import utils.ExcelUtils;
 import utils.IdentifyWebElement;
+import utils.PerformanceTracker;
 import utils.WaitUtils;
 
 public class EndToEndTest extends BaseTest {
@@ -48,15 +56,23 @@ public class EndToEndTest extends BaseTest {
 	
   @Test(priority=0)
   public void verifyLogin() throws InterruptedException, IOException {
-	  loginPage.verifyLoginPageIsDisplayed();
+	  try {
 	  logger.info("Login Page is displayed");
+	  // fetch login username and password from Test Data Excel
 	  loginPage.fetchLoginData();
 	  logger.info("Username and Password fetched from Test Data Excel.");
+	  logger.info("Login Page is displayed");
 	  loginPage.enterLoginInfo();
 	  logger.info("User provided login details.");
 	  logger.info("User logged in.");
+	  
+	  }
+	  catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+	  }
 }
-  
   
   
   /**
@@ -69,32 +85,35 @@ public class EndToEndTest extends BaseTest {
    *   Clicks the "Go to Cart" icon to add the product to the cart using {@link SwagLabsPage#clickGoToCartPageIcon()}.
    *   Logs each of these actions to provide a detailed trace of the process.
    * 
-   * 
    * The method also handles potential interruptions during the process by catching the {@link InterruptedException}.
    * 
-   * @throws IOException If there is an I/O error when fetching product data from the test data source (e.g., reading from Excel).
-   * @throws InterruptedException If the thread is interrupted during the product addition process (e.g., while waiting for UI actions).
-   * 
    * @return None
+ * @throws Exception 
    */
   
   
   @Test(priority=1)
-	public void verifyAddProductToCart() throws IOException, InterruptedException {
-	 //swagLabsPage.verifyLoginSuccessful();
-	 //System.out.println("Verified Login Successful");
+	public void verifySearchProductAndAddProductToCart() throws Exception {
+	  //Verify login success
+	 swagLabsPage.verifyLoginSuccessful();
+	 logger.info("User logged in successfully.");
 	  try {
+		  //fetch product data from Test Data Excel that user needs to search
 		  String searchProductInExcel = swagLabsPage.fetchProductData();
+		  Thread.sleep(5000);
 		  logger.info("Product retrieved from Test Data Excel is : " +searchProductInExcel);
+		  // search product in UI and add to cart
 		  productInCartTitle = swagLabsPage.searchProductTitle();
 		  logger.info("Product searched in UI.");
-		  swagLabsPage.clickGoToCartPageIcon();
 		  logger.info("Product added to cart.");
+		  // Click to Go to Cart Page
+		  swagLabsPage.clickGoToCartPageIcon();
 		  logger.info("Navigate to Cart page.");
 	  }
 	  catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 	  }
 	 //swagLabsPage.clickOpenMenuIcon();
 	 //eleUtil.selectSubMenu("About"); 
@@ -121,62 +140,77 @@ public class EndToEndTest extends BaseTest {
   
 	@Test(priority=2)
 	public void verifyProductAddedToCart() throws InterruptedException {
-		String productInCartPageTitle = cartPage.productInCart(driver);
-		logger.info("Product displayed in cart : " +productInCartPageTitle);
-		logger.info("Search for the added Product in the Cart page.");
-		if(productInCartPageTitle.equalsIgnoreCase(productInCartTitle)) {
+		String message = "Same Product not added to Cart.";
+		try {
+			logger.info("Search for the added Product in the Cart page.");
+			//fetch the product title in cart in Cart page
+			String productInCartPageTitle = cartPage.productInCart(driver);
+			logger.info("Product displayed in cart : " +productInCartPageTitle);
+		
+			// Validate the product title of cart page with the product searched
+			if(productInCartPageTitle.equalsIgnoreCase(productInCartTitle)) {
 			System.out.println("Same Product Added in Cart");
 			logger.info("Product verified. Same Product Added in Cart.");
+			//Click on Checkout button
 			cartPage.clickCheckOut();
+			logger.info("Click Checkout button.");
 			logger.info("Go to Checkout Page.");
 		}else {
+			Assert.assertEquals(productInCartPageTitle, productInCartPageTitle, message);
 			System.out.println("Same Product Not Added in Cart");
 			logger.info("Same Product not added or present in Cart.");
 		}
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+	  }
 	}
 	
 	
 	
 	
 	/**
-	 * Verifies the details on the Checkout page, including retrieving and entering contact information.
+	 * This method verifies the details of the Checkout page, including fetching the page title,
+	 * verifying the title with the expected value, fetching contact information from an Excel file,
+	 * entering the details into the UI, and clicking the continue button to proceed to the Checkout Overview page.
+	 * It also includes proper logging for each step of the process.
 	 * 
-	 * This method performs the following steps:
-	 * 
-	 *   Retrieves and logs the title of the Checkout page using {@link CheckoutPage#getCheckoutPageTitle()}.
-	 *   Fetches the contact information from the test data source (likely Excel) using {@link CheckoutPage#fetchContactInfo()}.
-	 *   Enters the fetched contact information into the UI using {@link CheckoutPage#enterContactDetails()}.
-	 *   Clicks the "Continue" button to proceed to the next page using {@link CheckoutPage#clickContinueBtn()}.
-	 *   Logs each action performed during the checkout process.
-	 * 
-	 * 
-	 * After clicking the continue button, the method waits for 5 seconds to simulate a delay in navigation before proceeding.
-	 * 
-	 * If the thread is interrupted during any of the actions, the method catches and logs the {@link InterruptedException.
-	 * 
-	 * @throws InterruptedException If the thread is interrupted during the execution, such as when waiting for page loads or UI interactions.
-	 * @throws IOException If there is an issue retrieving contact information from the test data source (e.g., Excel file).
+	 * @throws InterruptedException if the thread is interrupted while the test is running.
+	 * @throws IOException if an I/O error occurs, particularly when fetching data from the Test Data Excel sheet.
 	 * @return None
-	 *
 	 */
 	@Test(priority=3)
 	public void verifyCheckOutPageDetails() throws InterruptedException, IOException {
+		String expectedPageTitle = "Checkout: Your Information";
+		String message = "Checkout: Your Information Page is not getting displayed.";
 		try {
-		String pageTitle = checkoutPage.getCheckoutPageTitle();
-		logger.info("Page displayed : " +pageTitle);
-		System.out.println("Page Displayed : " +pageTitle);
+			//fetch page title
+		String actualPageTitle = checkoutPage.getCheckoutPageTitle();
+		logger.info("Page displayed : " +actualPageTitle);
+		System.out.println("Page Displayed : " +actualPageTitle);
+		// verify page title
+		Assert.assertEquals(actualPageTitle, expectedPageTitle, message);
+		//fetch contact details from Test Data Excel sheet
 		checkoutPage.fetchContactInfo();
 		logger.info("Contact Details are fetched from Test Data Excel."); 
+		//enter the details in UI
 		checkoutPage.enterContactDetails();
 		logger.info("Contact Details entered in UI."); 
+		//Click on Continue button
 		checkoutPage.clickContinueBtn();
 		logger.info("Clicked on Continue button."); 
 		logger.info("Navigate to Checkout Overview page."); 
-		Thread.sleep(5000);
+		CaptureRequest cp = new CaptureRequest();
+//		PerformanceTracker pT = new PerformanceTracker(cp.devTools);
+//		pT.captureMetrics();
+//		System.out.println();
+		
 		}
 		catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 	  }
 	}
 	
@@ -208,12 +242,15 @@ public class EndToEndTest extends BaseTest {
 		String expectedPageTitle = "Checkout: Overview";
 		String message = "Checkout Overview Page is not getting displayed.";
 		try {
+			//fetch page title
 		String actualPageTitle = checkoutOverviewPage.getPageTitle();
 		logger.info("Page Displayed : " +actualPageTitle);
 		System.out.println("Page Displayed : " +actualPageTitle);
+		//fetch product title in cart
 		String actualProductInCart = checkoutOverviewPage.productInCart();
 		logger.info("Product verified in cart. : " +actualProductInCart);
-		//System.out.println(actualPageTitle);
+		//System.out.println(actualPageTitle)he
+		// Validate product title in cart with the actual product title added to cart
 		if(actualProductInCart.equalsIgnoreCase(productInCartTitle)) {
 			System.out.println("Same Product displayed in Checkout Overview page.");
 			logger.info("Same Product displayed in cart in Checkout Overview page.");
@@ -221,7 +258,9 @@ public class EndToEndTest extends BaseTest {
 			System.out.println("Same Product not displayed in Checkout Overview page.");
 			logger.info("Same Product not displayed in cart in Checkout Overview page.");
 		}
+		// verify page title
 		Assert.assertEquals(actualPageTitle, expectedPageTitle, message);
+		//Click on Finish button
 		checkoutOverviewPage.clickFinishBtn();
 		logger.info("Clicked on Finish button.");
 		
@@ -230,6 +269,41 @@ public class EndToEndTest extends BaseTest {
 		catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 	}
 	}
+	
+	
+	/**
+	 * Verifies that a value is updated in an Excel file by calling the {@link LoginPage#updateValueInExcel()} method.
+	 * This method logs the steps of the process, including information about updating the value in the Excel file.
+	 * 
+	 * 	The method catches and handles any {@link InterruptedException} that might be thrown during the update process.
+	 * 
+	 * Steps performed:
+	 * 
+	 *     Logs the start of the value update process.
+	 *     Calls the LoginPage#updateValueInExcel()} method to update the value in the Excel file.
+	 *     Logs a success message after the value is updated.
+	 * 
+	 *
+	 * 
+	 * @throws InterruptedException If the thread is interrupted while the value update process is running.
+	 */
+	@Test(priority=5)
+	public void verifyUpdateValueInExcel() throws InterruptedException {
+		try {
+			//Update the value in Excel
+			logger.info("Verify Value updated in Excel");
+            loginPage.updateValueInExcel();
+            logger.info("Value updated in Excel.");
+		}
+		catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+	}
+	
+     	
 }

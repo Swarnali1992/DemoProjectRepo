@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-  <test thread-count="5" name="APITest">
-    <classes>
-      <class name="testAPI.RestAPITest"/>
-    </classes>
-  </test> <!-- APITest -->
+<listeners>
+<listener class-name="utils.SuiteListener"></listener>
+</listeners>
+ <test thread-count="1" name="Test">
+ <parameter name="env" value="api"></parameter>
+  <classes>
+  <class name="testAPI.RestAPITest">
+       <methods>
+        <include name="testGetUser" />
+         <include name="testCreateUser" />
+   		</methods>
+        </class>       
+     </classes>
+  </test> <!-- Test -->
 </suite> <!-- Suite -->
+

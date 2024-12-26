@@ -1,11 +1,17 @@
 package utils;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFCreationHelper;
@@ -14,11 +20,13 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import base.BaseTest;
 
+
+
 public class ExcelUtils {
 	public String path;
 	public FileInputStream fis = null;
-	public FileOutputStream fileOut = null;
-	public XSSFWorkbook workbook = null;
+	public static FileOutputStream fileOut = null;
+	public static XSSFWorkbook workbook = null;
 	private XSSFSheet sheet = null;
 	private XSSFRow row = null;
 	private XSSFCell cell = null;
@@ -28,7 +36,6 @@ public class ExcelUtils {
 		try {
 			fis = new FileInputStream(path);
 			workbook = new XSSFWorkbook(fis);
-			System.out.println("2----------");
 			sheet = workbook.getSheetAt(0);
 			fis.close();
 			} catch (Exception e) {
@@ -98,7 +105,6 @@ public class ExcelUtils {
 						cal.setTime(DateUtil.getJavaDate(d));
 						cellText = (String.valueOf(cal.get(Calendar.YEAR))).substring(2);
 						cellText = cal.get(Calendar.MONTH) + 1 + "/" + cal.get(Calendar.DAY_OF_MONTH) + "/" + cellText;
-
 						// System.out.println(cellText);
 
 					}
@@ -285,8 +291,85 @@ public class ExcelUtils {
 
 			if (row == null)
 				return -1;
-
 			return row.getLastCellNum();
 
 		}
+		
+		/**
+		 * Writes a value to a specific cell in an Excel file at the given file path and sheet name.
+		 * It opens an existing Excel file, retrieves the specified sheet, row, and column, 
+		 * and writes the provided value to the target cell. If the sheet, row, or cell does not 
+		 * exist, they are created.
+		 * <p>
+		 * The method performs the following tasks:
+		 * 
+		 *     	Opens the Excel file from the given file path.
+		 *     Gets or creates the specified sheet, row, and cell.
+		 *     Writes the given value to the specified cell.
+		 *     Saves the changes back to the Excel file.
+		 * 
+		 * 
+		 * 
+		 * A `FileNotFoundException` is caught if the file cannot be found during the process of 
+		 * writing the changes back to the Excel file.
+		 * 
+		 * 
+		 * @param filePath The file path of the Excel file to be modified.
+		 * @param sheetName The name of the sheet in the Excel file where the value will be written.
+		 * @param rowNum The row number (0-based index) where the value will be written.
+		 * @param colNum The column number (0-based index) where the value will be written.
+		 * @param value The value to be written to the cell.
+		 * 
+		 * @throws IOException If an error occurs while reading or writing the Excel file.
+		 * @return None
+		 */
+		
+		public static void writeToExcel(String filePath, String sheetName, int rowNum, int colNum, String value) throws IOException {
+	        // Open the existing Excel fileWorkbook
+	        FileInputStream fis = new FileInputStream(BaseTest.excelFilePath);
+	         workbook = new XSSFWorkbook(fis);  // Use XSSFWorkbook for .xlsx files
+
+	        // Get the sheet by name or create a new sheet if it doesn't exist
+	        Sheet sheet = workbook.getSheet(sheetName);
+	        if (sheet == null) {
+	            sheet = workbook.createSheet(sheetName);
+	        }
+
+	        // Get the row, or create it if it doesn't exist
+	        Row row = sheet.getRow(rowNum);
+	        if (row == null) {
+	            row = sheet.createRow(rowNum);
+	        }
+
+	        // Get the cell, or create it if it doesn't exist
+	        Cell cell = row.getCell(colNum);
+	        if (cell == null) {
+	            cell = row.createCell(colNum);
+	        }
+	        // Generate a unique name for the screenshot based on current timestamp
+	        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+	        
+	        // Write the value to the specified cell
+	        cell.setCellValue(value+"_"+timeStamp);
+
+	        // Close the input stream
+	        fis.close();
+
+	        // Write the changes back to the Excel file
+	        try {
+				fileOut = new FileOutputStream(filePath);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        workbook.write(fileOut);
+	        fileOut.close();
+
+	        // Close the workbook
+	        workbook.close();
+	    }
+
+		
+	
+		
 }

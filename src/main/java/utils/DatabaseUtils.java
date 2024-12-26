@@ -30,6 +30,7 @@ public class DatabaseUtils {
     // Establish database connection
     public static Connection connectToDatabase(String url, String username, String password) throws RuntimeException{
         try {
+        	System.out.println("Database Name : " + url);
             if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(url, username, password);
                 System.out.println("Database connection established successfully.");
@@ -99,4 +100,10 @@ public class DatabaseUtils {
             e.printStackTrace();
         }
     }
+    
+    
+    
+    
+    
+    
 }

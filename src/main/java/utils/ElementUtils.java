@@ -1,5 +1,6 @@
 package utils;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 import utils.IdentifyWebElement;
@@ -32,7 +33,13 @@ public class ElementUtils {
 	 */
 	
 	  public static void click(WebElement element) throws ElementClickInterceptedException,ElementNotInteractableException {
-	        element.click();
+	        try{
+	        	element.click();
+	        }
+	        catch (ElementClickInterceptedException e) {
+	            e.printStackTrace();
+	            throw new RuntimeException("Failed to click on element: " + e.getMessage());
+	        }
 	    }
 	  
 	  /**
@@ -50,9 +57,15 @@ public class ElementUtils {
 	   * @throws NullPointerException If the provided WebElement is null.
 	   */
 
-	    public static void enterText(WebElement element, String text) throws NullPointerException {
-	        element.clear();
-	        element.sendKeys(text);
+	    public static void enterText(WebElement element, String text) throws ElementNotInteractableException {
+	       try {
+	    	   element.clear();
+	           element.sendKeys(text);
+	       }
+	       catch (ElementNotInteractableException e) {
+	            e.printStackTrace();
+	            throw new RuntimeException("Failed to enter text in element: " + e.getMessage());
+	        }
 	    }
 
 	    /**
@@ -70,7 +83,7 @@ public class ElementUtils {
 	     * @throws NullPointerException If the provided WebElement is null.
 	     */
 	    
-	    public static String getText(WebElement element) throws NullPointerException {
+	    public static String getText(WebElement element) throws ElementNotInteractableException {
 	        return element.getText();
 	    }
 	    
@@ -92,7 +105,7 @@ public class ElementUtils {
 	     */
 	    
 	    
-	    public static boolean windowHandling(WebDriver driver, WebElement element, String expectedPageTitle) throws NullPointerException {
+	    public static boolean windowHandling(WebDriver driver, WebElement element, String expectedPageTitle) throws ElementNotInteractableException {
 	    	boolean flag = false;
 	    	String mainWindowHandle = driver.getWindowHandle();
 	        Set<String> allWindowHandles = driver.getWindowHandles();
@@ -126,7 +139,7 @@ public class ElementUtils {
 	    
 	    
 	    
-	    public static String mainWindow(WebDriver driver) throws IllegalStateException{
+	    public static String mainWindow(WebDriver driver) throws IllegalStateException, ElementNotInteractableException{
 	    	String mainWindowHandle = driver.getWindowHandle();
 	    	return mainWindowHandle;
 	    }
@@ -160,9 +173,10 @@ public class ElementUtils {
 	    
 	    
 	    
-	    public static void selectDropdownValue(WebDriver driver, WebElement elementDropdownList, String condition, String dropdownValue) throws IllegalArgumentException{
-	    	Select select = new Select(elementDropdownList);
-	    	 elementDropdownList.click();
+	    public static void selectDropdownValue(WebDriver driver, WebElement elementDropdownList, String condition, String dropdownValue) throws ElementNotInteractableException, IllegalArgumentException{
+	    	try{
+	    		Select select = new Select(elementDropdownList);
+	    		elementDropdownList.click();
 	    	switch(condition.toUpperCase())
 	    	{
 	    	case "VISIBLE TEXT": 
@@ -177,6 +191,12 @@ public class ElementUtils {
 	    		default:
 	    		System.out.println("Unable to select dropdown value.");
 	    	}
+	    	}
+	   
+	    catch (ElementNotInteractableException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to select value from dropdown list: " + e.getMessage());
+        }
 	    }
 	    
 	    /**
@@ -196,7 +216,10 @@ public class ElementUtils {
 	    
 	    
 	    public void selectSubMenu(String selectedSubMenu) throws NoSuchElementException, ElementClickInterceptedException{
-	    	List<WebElement> subMenu = ele.getWebElements("XPATH", SwagLabsPageObject.subMenuOptions);
+	    	try
+	    	{
+	    		List<WebElement> subMenu = ele.getWebElements("XPATH", SwagLabsPageObject.subMenuOptions);
+	    	
 	    	for(WebElement sbmenu: subMenu) {
 	  		  String subMenuName = sbmenu.getText();
 	  		  if(subMenuName.equalsIgnoreCase(selectedSubMenu))
@@ -204,7 +227,12 @@ public class ElementUtils {
 	  			sbmenu.click();
 	  			System.out.println("On About 1 page");
 	  		  }
+	    	}
 	  	  }
+	    	 catch (NoSuchElementException e) {
+	             e.printStackTrace();
+	             throw new RuntimeException("Failed to select value from dropdown list: " + e.getMessage());
+	         }
 	    }
 	    
 	 

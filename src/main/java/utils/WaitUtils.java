@@ -1,5 +1,7 @@
 package utils;
 import java.time.Duration;
+
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,29 +24,50 @@ public class WaitUtils {
 	 * 
 	 */
 	
-	  public static WebElement waitForVisibility(WebDriver driver, WebElement element, int timeoutInSeconds) {
-		  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-          return wait.until(ExpectedConditions.visibilityOf(element));
+	/**
+	 * Waits for an element to be visible on the page within a specified timeout.
+	 * 
+	 * @param driver The WebDriver instance used for interacting with the browser.
+	 * @param element The WebElement that is being waited for visibility.
+	 * @param timeoutInSeconds The maximum time to wait for the element to become visible.
+	 * @return The WebElement once it is visible within the specified timeout.
+	 * @throws TimeoutException If the element is not visible within the timeout period.
+	 */
+	public static WebElement waitForVisibility(WebDriver driver, WebElement element, int timeoutInSeconds) throws TimeoutException {
+	    // Create a WebDriverWait instance
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+	    
+	    try {
+	        // Wait until the element is visible
+	        return wait.until(ExpectedConditions.visibilityOf(element));
+	    } catch (TimeoutException e) {
+	        // Log and rethrow the exception for better visibility
+	        System.out.println("Element not visible after " + timeoutInSeconds + " seconds: " + e.getMessage());
+	        throw e;  // Rethrow the exception to notify the calling code
 	    }
-
-	  /**
-	   * This method waits for the given element to become clickable within the specified timeout.
-	   * An element is considered clickable if it is visible and enabled.
-	   *
-	   * @param driver The WebDriver instance used to interact with the browser. It is used to initiate the wait.
-	   * @param element The WebElement that needs to become clickable. The method waits for this element
-	   *                to be both visible and enabled.
-	   * @param timeout The maximum duration to wait for the element to become clickable. If the element does not become
-	   *                clickable within this duration, a {@link org.openqa.selenium.TimeoutException} will be thrown.
-	   * 
-	   * @return The WebElement that became clickable. This is returned when the element is clickable.
-	   * 
-	   * @throws org.openqa.selenium.TimeoutException If the element does not become clickable within the specified timeout.
-	   */
+	}
 	  
-   public static WebElement waitForClickable(WebDriver driver, WebElement element, Duration timeout)  {
-       WebDriverWait wait = new WebDriverWait(driver, timeout);
-       return wait.until(ExpectedConditions.elementToBeClickable(element));
-   }
+	/**
+	 * Waits for the given element to become clickable within the specified timeout.
+	 * 
+	 * @param driver The WebDriver instance that is interacting with the browser.
+	 * @param element The WebElement to wait for.
+	 * @param timeout The maximum time to wait for the element to be clickable.
+	 * @return The WebElement once it becomes clickable.
+	 * @throws TimeoutException If the element is not clickable within the specified timeout.
+	 */
+	public static WebElement waitForClickable(WebDriver driver, WebElement element, Duration timeout)throws TimeoutException {
+	    // Initialize WebDriverWait with a Duration object
+	    WebDriverWait wait = new WebDriverWait(driver, timeout);
+
+	    try {
+	        // Wait for the element to become clickable and return it
+	        return wait.until(ExpectedConditions.elementToBeClickable(element));
+	    } catch (TimeoutException e) {
+	        // Handle TimeoutException if the element isn't clickable within the timeout period
+	        System.out.println("Element not clickable after " + timeout.getSeconds() + " seconds: " + e.getMessage());
+	        throw e; // Re-throw the exception after logging it
+	    }
+	}
 
 }

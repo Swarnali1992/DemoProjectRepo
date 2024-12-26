@@ -11,19 +11,35 @@ public class PerformanceTracker {
 
     public PerformanceTracker(DevTools devTools) {
         this.devTools = devTools;
+        System.out.println("Inside Performance Tracker");
     }
+
+    
     /**
-     * Captures and prints the performance metrics of the browser using Chrome DevTools Protocol.
+     * Captures performance metrics from the browser using DevTools.
+     * This method enables the performance domain and retrieves various metrics.
      * 
-     * This method enables the performance metrics collection through the DevTools API and retrieves the metrics.
-     * It then prints the name and value of each metric to the standard output (console).
-     * 
-     * The method interacts with the Chrome DevTools Protocol (CDP) via the {@link DevTools} object to enable and retrieve performance data.
+     * The method handles potential exceptions that may occur during the process.
      * @return None
      */
     public void captureMetrics() {
-        devTools.send(Performance.enable(java.util.Optional.empty()));
-        List<Metric> metrics = devTools.send(Performance.getMetrics());
-        metrics.forEach(metric -> System.out.println(metric.getName() + ": " + metric.getValue()));
+        try {
+            // Log that we're inside the method
+            System.out.println("Inside captureMetrics()");
+
+            // Enable the Performance domain to capture performance metrics
+            devTools.send(Performance.enable(java.util.Optional.empty()));
+
+            // Retrieve the list of performance metrics
+            List<Metric> metrics = devTools.send(Performance.getMetrics());
+
+            // Output each metric's name and value
+            metrics.forEach(metric -> System.out.println(metric.getName() + ": " + metric.getValue()));
+
+        } catch (Exception e) {
+            // Log any exceptions that may occur during the capture of metrics
+            System.err.println("Error while capturing performance metrics: " + e.getMessage());
+            e.printStackTrace(); // This will print the full stack trace of the error
+        }
     }
 }

@@ -28,6 +28,7 @@ public class AddProductToCart {
 	String productInCartTitle;
 	
 	
+	
 	@Test(priority=0)
 	public void verifyAddProductToCart() throws IOException, InterruptedException {
 	 //swagLabsPage.verifyLoginSuccessful();
@@ -65,7 +66,7 @@ public class AddProductToCart {
 	
 	@Test(priority=3)
 	public void verifyCheckOutOverviewPageDetails() throws InterruptedException {
-		String expectedPageTitle = "Checkout: Overview";
+		String expectedPageTitle = "Checkout: Overview1";
 		String message = "Checkout Overview Page is not getting displayed.";
 		String actualPageTitle = checkoutOverviewPage.getPageTitle();
 		System.out.println("Page Displayed : " +actualPageTitle);
@@ -80,4 +81,6 @@ public class AddProductToCart {
 		checkoutOverviewPage.clickFinishBtn();
 		
 	}
+	
+	
 }

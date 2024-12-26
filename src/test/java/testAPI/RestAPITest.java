@@ -91,7 +91,7 @@ public class RestAPITest extends BaseTestAPI {
           System.out.println("The Response Status Code is : " + response.getCode());
           
           // Validate the status code
-          Assert.assertTrue(APIUtils.validateStatusCode(response,RESPONSE_STATUS_CODE_200 ), "Status code is not 201");
+          Assert.assertTrue(APIUtils.validateStatusCode(response,RESPONSE_STATUS_CODE_201), "Status code is not 201");
           // Validate the response Body          
           Assert.assertTrue(responseBody.contains("\"name\": \"John Doe\""), "Response does not contain expected name");
       }

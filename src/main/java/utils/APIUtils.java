@@ -2,6 +2,7 @@ package utils;
 
 import java.io.IOException;
 
+import org.apache.hc.client5.http.ClientProtocolException;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
@@ -13,26 +14,32 @@ import org.apache.hc.core5.http.io.entity.StringEntity;
 
 public class APIUtils {
 	private static CloseableHttpClient httpClient = HttpClients.createDefault();
-	
-	/**
-	 * Sends an HTTP GET request to the specified URL and returns the response.
-	 * 
-	 * This method creates an HTTP GET request for the provided URL, executes the request using an HTTP client,
-	 * and returns the response as a {@link CloseableHttpResponse}. The caller is responsible for closing the response
-	 * to release resources.
-	 *
-	 * @param url The URL to which the GET request is sent. It must be a valid HTTP/HTTPS URL.
-	 * @return A CloseableHttpResponse containing the response from the server.
-	 *         The response includes status code, headers, and entity content.
-	 * @throws IOException If there is an error during the request execution or if the URL is invalid.
-	 */
+
+    /**
+     * Sends an HTTP GET request to the specified URL and returns the response.
+     * 
+     * This method sends a GET request to the specified URL using Apache HttpClient. It returns the 
+     * CloseableHttpResponse object that contains the server's response to the request. 
+     * In case of network or protocol errors, appropriate exceptions are thrown.
+     * 
+     * @param url The URL to which the GET request is to be sent. It should be a valid HTTP/HTTPS URL.
+     * @return CloseableHttpResponse The response from the server. You should close this response 
+     *         once you're done processing it to release the underlying resources.
+     * @throws IOException If an I/O error occurs while sending the request or reading the response. This can
+     *         happen due to network issues, server unavailability, or protocol errors.
+     * @throws ClientProtocolException If there is a protocol violation when sending the request or receiving
+     *         the response. This typically occurs when the server returns a response that does not conform
+     *         to HTTP standards.
+     *         
+     */
 	
     // Send GET request
    // @SuppressWarnings("deprecation")
-	public static CloseableHttpResponse sendGetRequest(String url) throws IOException {
-    	HttpGet getRequest = new HttpGet(url);
-        CloseableHttpResponse response=httpClient.execute(getRequest);
-        return response;
+	public static CloseableHttpResponse sendGetRequest(String url) throws IOException, ClientProtocolException {
+	
+			HttpGet getRequest = new HttpGet(url);
+	        CloseableHttpResponse response=httpClient.execute(getRequest);
+	        return response;
     }
 
 	
@@ -48,12 +55,16 @@ public class APIUtils {
 	 * @return A CloseableHttpResponse containing the server's response, including the status code, headers, and
 	 *         response content.
 	 * @throws IOException If there is an error during the request execution, such as network issues or invalid URL.
+	 * @throws ClientProtocolException If there is a protocol violation when sending the request or receiving
+     *         the response. This typically occurs when the server returns a response that does not conform
+     *         to HTTP standards.
+	 * 
 	 */
 	
 	
     // Send POST request
     @SuppressWarnings("deprecation")
-	public static CloseableHttpResponse sendPostRequest(String url, String body) throws IOException {
+	public static CloseableHttpResponse sendPostRequest(String url, String body) throws IOException, ClientProtocolException {
         HttpPost postRequest = new HttpPost(url);
         postRequest.setEntity(new StringEntity(body));
         postRequest.setHeader("Content-Type", "application/json");

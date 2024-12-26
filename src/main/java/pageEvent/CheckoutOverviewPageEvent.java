@@ -12,65 +12,105 @@ public class CheckoutOverviewPageEvent {
 	IdentifyWebElement ele = new IdentifyWebElement();
 	
 	/**
-	 * Clicks the "Finish" button on the Checkout Overview page.
-	 * 
-	 * This method retrieves the "Finish" button element on the Checkout Overview page using its ID (specified in 
-	 * the {@link CheckoutOverviewPageObject} class) and performs a click action on it using the {@link WebElement}.
-	 * 
-	 * Once clicked, the user is expected to complete the checkout process (e.g., order confirmation, success screen, etc.).
-	 * 
-	 * @throws InterruptedException If the thread is interrupted while sleeping or performing actions in the method.
-	 * @throws NoSuchElementException If the "Finish" button element is not found on the Checkout Overview page.
-	 * @throws WebDriverException If there is a failure while interacting with the WebDriver (e.g., element not clickable).
-	 * @return None
+	 * This method clicks the Finish button on the Checkout Overview page.
+	 * It handles potential exceptions that might occur while interacting with the WebDriver.
+	 *
+	 * @throws InterruptedException If the thread is interrupted during the process.
+	 * @throws NoSuchElementException If the Finish button element cannot be found.
+	 * @throws WebDriverException If there is an issue while interacting with the WebDriver.
 	 */
-	
-	 public void clickFinishBtn() throws InterruptedException, NoSuchElementException, WebDriverException {
-		 ele.getWebElement("ID", CheckoutOverviewPageObject.finishBtn).click();
-		 System.out.println("Clicked on Finish Button.");
+	public void clickFinishBtn() throws InterruptedException, NoSuchElementException, WebDriverException {
+	    try {
+	        // Attempt to click the Finish button
+	        ele.getWebElement("ID", CheckoutOverviewPageObject.finishBtn).click();
+	        System.out.println("Clicked on Finish Button.");
+
+	    } catch (NoSuchElementException e) {
+	        // Log the error and rethrow the exception if the element is not found
+	        System.out.println("Error: Finish button element not found.");
+	        e.printStackTrace();
+	        throw new NoSuchElementException("Finish button element not found.", e);
+
+	    } catch (WebDriverException e) {
+	        // Log the error and rethrow the exception if there is a WebDriver interaction issue
+	        System.out.println("Error: WebDriver exception occurred while clicking Finish button.");
+	        e.printStackTrace();
+	        throw new WebDriverException("WebDriver issue while clicking Finish button.", e);
+
+	    } catch (Exception e) {
+	        // Catch any other unforeseen exceptions
+	        System.out.println("An unexpected error occurred while clicking Finish button: " + e.getMessage());
+	        e.printStackTrace();
+	        throw new RuntimeException("Unexpected error while clicking Finish button.", e);
+	    }
 	}
 	 
-	 /**
-	  * Retrieves the title of the Checkout Overview page.
-	  * 
-	  * This method locates the page title element on the Checkout Overview page using its XPath (specified in 
-	  * the {@link CheckoutOverviewPageObject} class), extracts the text of the title, and returns it. This title 
-	  * typically indicates the page's purpose or heading (e.g., "Checkout: Overview").
-	  * 
-	  * @return The title of the Checkout Overview page as a {@link String}.
-	  * @throws InterruptedException If the thread is interrupted while waiting or executing the method (e.g., during sleep).
-	  * @throws NoSuchElementException If the page title element is not found on the Checkout Overview page.
-	  * @throws WebDriverException If the WebDriver is unable to interact with the page title element (e.g., element not interactable).
-	  */
-	 
-	 public String getPageTitle() throws InterruptedException , WebDriverException, NoSuchElementException{
-		 String pageTitle = ele.getWebElement("XPATH", CheckoutOverviewPageObject.checkoutOverviewPageTitle).getText();
-		 return pageTitle;
+	/**
+	 * This method retrieves the page title from the Checkout Overview page.
+	 * It handles potential exceptions that may occur while interacting with the WebDriver and fetching the page title.
+	 *
+	 * @return The title of the Checkout Overview page.
+	 * @throws InterruptedException If the thread is interrupted during the process.
+	 * @throws WebDriverException If there is an issue with the WebDriver during the interaction.
+	 * @throws NoSuchElementException If the page title element cannot be found.
+	 */
+	public String getPageTitle() throws InterruptedException, WebDriverException, NoSuchElementException {
+	    String pageTitle = null;
+	    try {
+	        // Attempt to get the page title by fetching the text from the element
+	        pageTitle = ele.getWebElement("XPATH", CheckoutOverviewPageObject.checkoutOverviewPageTitle).getText();
+	        System.out.println("Page Title: " + pageTitle);
+	    } catch (NoSuchElementException e) {
+	        // Log the error and rethrow the exception if the page title element cannot be found
+	        System.out.println("Error: Page title element not found.");
+	        e.printStackTrace();
+	        throw new NoSuchElementException("Checkout Overview page title element not found.", e);
+	    } catch (WebDriverException e) {
+	        // Log the error and rethrow the exception if there is a WebDriver interaction issue
+	        System.out.println("Error: WebDriver exception occurred while retrieving the page title.");
+	        e.printStackTrace();
+	        throw new WebDriverException("WebDriver issue while retrieving the page title.", e);
+	    } catch (Exception e) {
+	        // Catch any other unforeseen exceptions
+	        System.out.println("An unexpected error occurred while retrieving the page title: " + e.getMessage());
+	        e.printStackTrace();
+	        throw new RuntimeException("Unexpected error while retrieving the page title.", e);
+	    }
+	    return pageTitle;
 	}
 	 
 	 
-	 
-	 /**
-	  * Retrieves the product title displayed in the Checkout Overview page.
-	  * 
-	  * This method locates the product title element on the Checkout Overview page using its XPath (specified in 
-	  * the {@link CheckoutOverviewPageObject} class), extracts the text of the product, and returns it. The returned 
-	  * text represents the title of the product that has been added to the cart and is being reviewed in the checkout process.
-	  * 
-	  * The method also logs the product title to the console for visibility or debugging purposes.
-	  * 
-	  * @return The title of the product displayed in the Checkout Overview page.
-	  * @throws InterruptedException If the thread is interrupted while waiting or executing the method (e.g., during sleep).
-	  * @throws NoSuchElementException If the product title element is not found on the Checkout Overview page.
-	  * @throws WebDriverException If the WebDriver is unable to interact with the product title element (e.g., element not interactable).
-	  */
-	 
-	 
-	 
-	 public String productInCart() throws InterruptedException,NoSuchElementException ,WebDriverException{
-			String productCart = ele.getWebElement("XPATH",CheckoutOverviewPageObject.productTitle).getText();
-			System.out.println(productCart);
-			return productCart;
-		}
-		
+	/**
+	 * This method retrieves the product title displayed in the cart from the Checkout Overview page.
+	 * It handles potential exceptions that may occur while interacting with the WebDriver to fetch the product title.
+	 *
+	 * @return The title of the product in the cart.
+	 * @throws InterruptedException If the thread is interrupted during the process.
+	 * @throws NoSuchElementException If the product title element cannot be found on the page.
+	 * @throws WebDriverException If there is an issue with the WebDriver during the interaction.
+	 */
+	public String productInCart() throws InterruptedException, NoSuchElementException, WebDriverException {
+	    String productCart = null;
+	    try {
+	        // Attempt to retrieve the product title from the cart
+	        productCart = ele.getWebElement("XPATH", CheckoutOverviewPageObject.productTitle).getText();
+	        System.out.println("Product in Cart: " + productCart);
+	    } catch (NoSuchElementException e) {
+	        // Log the error and rethrow the exception if the product title element cannot be found
+	        System.out.println("Error: Product title element not found in cart.");
+	        e.printStackTrace();
+	        throw new NoSuchElementException("Product title element not found in cart.", e);
+	    } catch (WebDriverException e) {
+	        // Log the error and rethrow the exception if there is a WebDriver interaction issue
+	        System.out.println("Error: WebDriver exception occurred while retrieving product title in cart.");
+	        e.printStackTrace();
+	        throw new WebDriverException("WebDriver issue while retrieving product title in cart.", e);
+	     } catch (Exception e) {
+	        // Catch any other unforeseen exceptions
+	        System.out.println("An unexpected error occurred while retrieving product title in cart: " + e.getMessage());
+	        e.printStackTrace();
+	        throw new RuntimeException("Unexpected error while retrieving product title in cart.", e);
+	    }
+	    return productCart;
+	}
 }

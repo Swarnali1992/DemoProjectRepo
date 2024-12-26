@@ -3,15 +3,20 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testUI.LoginPageTest">
+      <class name="testUI.EndToEndTest">
         <methods>
-          <include name="beforeTest"/>
           <include name="afterMethod"/>
+          <include name="beforeTest"/>
+          <include name="verifyCheckOutPageDetails"/>
+          <include name="verifyCheckOutOverviewPageDetails"/>
           <include name="afterTest"/>
           <include name="beforeMethod"/>
+          <include name="db"/>
+          <include name="verifySearchProductAndAddProductToCart"/>
+          <include name="verifyLogin"/>
           <include name="verifyProductAddedToCart"/>
         </methods>
-      </class> <!-- testUI.LoginPageTest -->
+      </class> <!-- testUI.EndToEndTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

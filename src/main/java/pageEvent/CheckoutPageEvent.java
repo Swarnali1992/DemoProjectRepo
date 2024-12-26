@@ -20,116 +20,158 @@ public class CheckoutPageEvent {
 	
 	
 	/**
-	 * Fetches the contact information (first name, last name, and postal code) from an Excel file.
+	 * Fetches the contact information (First Name, Last Name, and Postal Code) from an Excel file
+	 * and prints the retrieved values.
 	 * 
-	 * This method uses the {@link ExcelUtils} class to read contact information from an Excel file. The data is 
-	 * retrieved from the specified row number and stored in the respective fields: first name, last name, and postal 
-	 * code. The row number and sheet name are defined in the test setup, and the Excel file is used as the source for 
-	 * the contact information.
+	 * This method reads contact information from the Excel file and stores it in instance variables
+	 * for further use. It handles potential issues related to reading data from the Excel file,
+	 * and logs the appropriate error messages in case of failure.
 	 * 
-	 * The retrieved contact details are printed to the console for debugging purposes.
-	 * 
-	 * @throws NumberFormatException If there is an issue parsing the row number to an integer or fetching data from the specified row.
-	 * @throws IOException If there is an issue reading the Excel file (e.g., file not found or access issues).
+	 * @throws NumberFormatException If the row number is not a valid integer.
+	 * @throws IOException If there is an issue reading the Excel file.
 	 * @return None
-	 *
 	 */
-	
-	public void fetchContactInfo() throws NumberFormatException, IOException {
-		  ExcelUtils excelutil = new ExcelUtils(BaseTest.excelFilePath);
-			try {
-				firstName = excelutil.getCellData(sheetName,Integer.parseInt(BaseTest.rowNum), 0);
-				lastName = excelutil.getCellData(sheetName,Integer.parseInt(BaseTest.rowNum), 1);
-				postalCode = excelutil.getCellData(sheetName,Integer.parseInt(BaseTest.rowNum), 2);
-				System.out.println("The First Name retrieved from Excel : " + firstName);
-				System.out.println("The Last Name retrieved from Excel : " + lastName);
-				System.out.println("The Postal Code retrieved from Excel : " + postalCode);
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	public void fetchContactInfo() throws NumberFormatException,IOException{
+	    ExcelUtils excelutil = null;
+	    try {
+	        excelutil = new ExcelUtils(BaseTest.excelFilePath);
+	        firstName = excelutil.getCellData(sheetName, Integer.parseInt(BaseTest.rowNum), 0);
+	        lastName = excelutil.getCellData(sheetName, Integer.parseInt(BaseTest.rowNum), 1);
+	        postalCode = excelutil.getCellData(sheetName, Integer.parseInt(BaseTest.rowNum), 2);
+
+	        // Log the retrieved data for debugging
+	        System.out.println("The First Name retrieved from Excel : " + firstName);
+	        System.out.println("The Last Name retrieved from Excel : " + lastName);
+	        System.out.println("The Postal Code retrieved from Excel : " + postalCode);
+
+	    } catch (NumberFormatException e) {
+	        // Log and handle NumberFormatException if the row number is not a valid integer
+	        System.out.println("Error: Invalid row number format. Please check the row number value.");
+	        e.printStackTrace();  // Print stack trace for debugging
+
+	    } catch (IOException e) {
+	        // Log and handle IOException if there are issues reading the Excel file
+	        System.out.println("Error: Unable to read the Excel file. Please check the file path.");
+	        e.printStackTrace();  // Print stack trace for debugging
+
+	    } catch (Exception e) {
+	        // Catch any other unexpected exceptions
+	        System.out.println("An unexpected error occurred while fetching contact info: " + e.getMessage());
+	        e.printStackTrace();  // Print stack trace for debugging
+	    }
+	}
 	
 	
 	/**
-	 * Retrieves the title of the Checkout page.
+	 * Fetches the title of the Checkout page from the UI.
 	 * 
-	 * This method uses the {@link WebElement} locator to find the element representing the title of the Checkout page. 
-	 * It locates the element via XPath (defined in the {@link CheckoutPageObject} class) and returns the text of the element.
+	 * This method attempts to retrieve the title of the checkout page using the provided 
+	 * XPath to locate the element. It handles potential errors related to locating the element
+	 * or interacting with the web driver.
 	 * 
-	 * The returned string is typically the title or heading of the Checkout page, such as "Checkout: Information".
-	 * 
-	 * @return The title of the Checkout page as a {@link String}.
-	 * @throws NoSuchElementException If the Checkout page title element cannot be found using the provided XPath.
-	 * @throws WebDriverException If there is an issue interacting with the page title element (e.g., WebDriver is unable to retrieve the element's text).
-	 * 
-	 * 
+	 * @return The title of the Checkout page as a String.
+	 * @throws NoSuchElementException If the checkout page title element is not found.
+	 * @throws WebDriverException If there are any issues interacting with the WebDriver.
 	 */
-	
-	
-	
-	 
-	 public String getCheckoutPageTitle() throws NoSuchElementException, WebDriverException{
-		 return ele.getWebElement("XPATH", CheckoutPageObject.checkoutPageTitle).getText();
-	 }
-	 
-	 
-	 /**
-	  * Enters the user's contact details (first name, last name, postal code) into the Checkout page.
-	  * 
-	  * This method interacts with the form fields on the Checkout page, specifically for entering the user's first name, last name,
-	  * and postal code. It retrieves the contact details from the test data (typically from an Excel file or other data source), 
-	  * clears the fields, and enters the appropriate values.
-	  *
-	  * The method performs the following steps:
-	  * 
-	  *   Clicks on and clears the first name input field, then enters the first name.
-	  *   Clicks on and clears the last name input field, then enters the last name.
-	  *   Clicks on and clears the postal code input field, then enters the postal code.
-	  *   Waits for a brief period (5 seconds) after filling the form.
-	  * 
-	  * 
-	  * @throws WebDriverException If there is a WebDriver-related issue, such as being unable to find an element.
-	  * @throws NoSuchElementException If a web element could not be found on the page.
-	  * @throws InterruptedException If the thread is interrupted while the method is sleeping for 5 seconds.
-	  * 
-	  * @return None
-	  */
-	 
-	 
-	 
-	 
-	 public void enterContactDetails() throws WebDriverException, NoSuchElementException, InterruptedException{
-		 ele.getWebElement("ID", CheckoutPageObject.firstName).click();
-		 ele.getWebElement("ID", CheckoutPageObject.firstName).clear();
-		 ele.getWebElement("ID", CheckoutPageObject.firstName).sendKeys(firstName);
-		 ele.getWebElement("ID", CheckoutPageObject.lastName).click();
-		 ele.getWebElement("ID", CheckoutPageObject.lastName).clear();
-		 ele.getWebElement("ID", CheckoutPageObject.lastName).sendKeys(lastName);
-		 ele.getWebElement("ID", CheckoutPageObject.postalCode).click();
-		 ele.getWebElement("ID", CheckoutPageObject.postalCode).clear();
-		 ele.getWebElement("ID", CheckoutPageObject.postalCode).sendKeys(postalCode);
-		 Thread.sleep(5000);
-	 }
-	 
-	 
-	 /**
-	  * Clicks on the "Continue" button on the Checkout page.
-	  * 
-	  * This method locates the "Continue" button using its ID, and clicks on it to proceed to the next step in the checkout process.
-	  * 
-	  * The following actions are performed:
-	  * 
-	  *   Locates the "Continue" button using the element locator defined in the `CheckoutPageObject.continueBtn`.
-	  *   Clicks on the button to proceed.
-	  *   Prints a confirmation message to the console indicating that the button was clicked.
-	  * 
-	  * 
-	  * @throws InterruptedException If the thread is interrupted while executing the method, such as during a sleep or wait.
-	  * @return None
-	  */
-	 public void clickContinueBtn() throws InterruptedException {
-		 ele.getWebElement("ID", CheckoutPageObject.continueBtn).click();
-		 System.out.println("Clicked on Continue Button.");
+	public String getCheckoutPageTitle() {
+	    try {
+	        // Attempt to fetch the checkout page title
+	        return ele.getWebElement("XPATH", CheckoutPageObject.checkoutPageTitle).getText();
+	    } catch (NoSuchElementException e) {
+	        // Log and handle the case where the element is not found
+	        System.out.println("Error: Checkout page title element not found.");
+	        e.printStackTrace();  // Print the stack trace for debugging
+	        throw new NoSuchElementException("Checkout page title element not found.", e);
+	    } catch (WebDriverException e) {
+	        // Log and handle the case where there's a WebDriver interaction issue
+	        System.out.println("Error: WebDriver exception occurred while fetching checkout page title.");
+	        e.printStackTrace();  // Print the stack trace for debugging
+	        throw new WebDriverException("WebDriver issue while fetching checkout page title.", e);
+	    } catch (Exception e) {
+	        // Catch any other unexpected exceptions
+	        System.out.println("An unexpected error occurred while getting the checkout page title: " + e.getMessage());
+	        e.printStackTrace();  // Print the stack trace for debugging
+	        throw new RuntimeException("Unexpected error while fetching checkout page title.", e);
+	    }
 	}
+	/**
+	 * This method is used to enter the contact details (first name, last name, and postal code) 
+	 * in the respective fields on the checkout page.
+	 * It clears any existing values and enters new values provided by the test data.
+	 * The method handles potential exceptions that might occur during the interaction with the web elements.
+	 * 
+	 * @throws WebDriverException If an issue occurs while interacting with the WebDriver.
+	 * @throws NoSuchElementException If any of the web elements cannot be found on the page.
+	 * @throws InterruptedException If the thread is interrupted during the sleep operation.
+	 * return None
+	 */
+	public void enterContactDetails() throws WebDriverException, NoSuchElementException, InterruptedException {
+	    try {
+	        // Enter First Name
+	        ele.getWebElement("ID", CheckoutPageObject.firstName).click();
+	        ele.getWebElement("ID", CheckoutPageObject.firstName).clear();
+	        ele.getWebElement("ID", CheckoutPageObject.firstName).sendKeys(firstName);
+
+	        // Enter Last Name
+	        ele.getWebElement("ID", CheckoutPageObject.lastName).click();
+	        ele.getWebElement("ID", CheckoutPageObject.lastName).clear();
+	        ele.getWebElement("ID", CheckoutPageObject.lastName).sendKeys(lastName);
+
+	        // Enter Postal Code
+	        ele.getWebElement("ID", CheckoutPageObject.postalCode).click();
+	        ele.getWebElement("ID", CheckoutPageObject.postalCode).clear();
+	        ele.getWebElement("ID", CheckoutPageObject.postalCode).sendKeys(postalCode);
+
+	        // Pause for 5 seconds to simulate wait time (if needed for form processing)
+	        Thread.sleep(5000);
+	    } catch (WebDriverException e) {
+	        // Log WebDriver exceptions and rethrow them
+	        System.out.println("WebDriverException occurred while interacting with the web elements.");
+	        e.printStackTrace();
+	        throw new WebDriverException("WebDriver issue encountered while entering contact details.", e);
+	    } catch (InterruptedException e) {
+	        // Log InterruptedException and rethrow it
+	        System.out.println("Thread was interrupted while waiting.");
+	        e.printStackTrace();
+	        throw new InterruptedException();
+	    } catch (Exception e) {
+	        // Catch any other unforeseen exceptions
+	        System.out.println("An unexpected error occurred while entering contact details: " + e.getMessage());
+	        e.printStackTrace();
+	        throw new RuntimeException("Unexpected error while entering contact details.", e);
+	    }
+	}
+	 
+	 /**
+	  * This method attempts to click the "Continue" button on the checkout page.
+	  * It uses the provided locator strategy to find the button element by its ID and performs a click action.
+	  * The method handles various exceptions related to element interactions.
+	  * 
+	  * @throws NoSuchElementException If the "Continue" button element cannot be found on the page.
+	  * @throws WebDriverException If there is an issue interacting with the WebDriver while attempting to click the button.
+	  * @throws RuntimeException If any other unforeseen error occurs during the execution of the method.
+	  * @return None
+	  */
+	 public void clickContinueBtn() throws NoSuchElementException, WebDriverException{
+	     try {
+	         // Attempt to click the Continue button
+	         ele.getWebElement("ID", CheckoutPageObject.continueBtn).click();
+	         System.out.println("Clicked on Continue Button.");
+	     } catch (NoSuchElementException e) {
+	         // Log the error and rethrow the exception if the element is not found
+	         System.out.println("Error: Continue button element not found.");
+	         e.printStackTrace();
+	         throw new NoSuchElementException("Continue button element not found.", e);
+	     } catch (WebDriverException e) {
+	         // Log the error and rethrow the exception if there is a WebDriver interaction issue
+	         System.out.println("Error: WebDriver exception occurred while clicking Continue button.");
+	         e.printStackTrace();
+	         throw new WebDriverException("WebDriver issue while clicking Continue button.", e);
+	     } catch (Exception e) {
+	         // Catch any other unforeseen exceptions
+	         System.out.println("An unexpected error occurred while clicking Continue button: " + e.getMessage());
+	         e.printStackTrace();
+	         throw new RuntimeException("Unexpected error while clicking Continue button.", e);
+	     }
+	 }
 }

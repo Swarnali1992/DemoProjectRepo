@@ -5,81 +5,117 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class JavaScriptUtils {
-	/**
-	 * Scrolls the web page to bring the specified element into view.
-	 * 
-	 * This method uses JavaScript to scroll the page and ensures that the provided element 
-	 * is brought into the visible portion of the web browser window.
-	 * 
-	 * @param driver The WebDriver instance that controls the browser.
-	 * @param element The WebElement to which the page should scroll.
-	 * @return None
-	 * @throws NullPointerException If the provided {@code driver} or {@code element} is {@code null}.
-	 */
-	
-	  public static void scrollToElement(WebDriver driver, WebElement element) throws NullPointerException  {
-	        JavascriptExecutor js = (JavascriptExecutor) driver;
-	        js.executeScript("arguments[0].scrollIntoView(true);", element);
-	    }
-
+		  
 	  /**
-	   * Clicks on the specified web element using JavaScript.
+	   * Scrolls the page to bring the specified WebElement into view.
 	   * 
-	   * This method uses JavaScript to trigger a click event on the provided web element.
-	   * This approach can be useful when the element is not interactable through standard
-	   * WebDriver methods, such as when the element is obscured by another element or not 
-	   * clickable in the traditional way due to other factors (e.g., CSS styles).
-	   * 
-	   * @param driver The WebDriver instance that controls the browser.
-	   * @param element The WebElement that needs to be clicked.
-	   * 
+	   * @param driver The WebDriver instance.
+	   * @param element The WebElement that should be scrolled into view.
 	   * @return None
-	   * @throws NullPointerException If the provided {@code driver} or {@code element} is {@code null}.
 	   */
+	  public static void scrollToElement(WebDriver driver, WebElement element) {
+	      if (driver == null) {
+	          System.err.println("WebDriver is null. Cannot perform scrolling.");
+	          return; // Avoid further execution if driver is null
+	      }
+
+	      if (element == null) {
+	          System.err.println("WebElement is null. Cannot scroll to a null element.");
+	          return; // Avoid further execution if element is null
+	      }
+
+	      try {
+	          // Execute JavaScript to scroll the element into view
+	          JavascriptExecutor js = (JavascriptExecutor) driver;
+	          js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+	      } catch (Exception e) {
+	          // Handle any potential exceptions (e.g., JavaScript execution issues)
+	          System.err.println("Error occurred while scrolling to element: " + e.getMessage());
+	          e.printStackTrace();
+	      }
+	  }
 	  
-	    public static void clickUsingJS(WebDriver driver, WebElement element) throws NullPointerException {
-	        JavascriptExecutor js = (JavascriptExecutor) driver;
-	        js.executeScript("arguments[0].click();", element);
-	    }
-	    
+
+/**
+ * Clicks on an element using JavaScript.
+ * 
+ * @param driver The WebDriver instance.
+ * @param element The WebElement to be clicked.
+ * @return None
+ */
+public static void clickUsingJS(WebDriver driver, WebElement element) {
+    if (driver == null) {
+        System.err.println("WebDriver is null. Cannot perform click operation.");
+        return; // Avoid further execution if driver is null
+    }
+
+    if (element == null) {
+        System.err.println("WebElement is null. Cannot click on a null element.");
+        return; // Avoid further execution if element is null
+    }
+
+    try {
+        // Execute JavaScript to click on the element
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", element);
+        System.out.println("Element clicked using JavaScript.");
+    } catch (Exception e) {
+        // Handle any potential exceptions (e.g., JavaScript execution issues)
+        System.err.println("Error occurred while clicking the element using JavaScript: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
 	  
-	    /**
-	     * Scrolls the webpage by a specified distance using JavaScript.
-	     * 
-	     * This method uses JavaScript to scroll the webpage vertically by a specified number of pixels. It is particularly
-	     * useful for scenarios where you need to scroll the page down to load more content or interact with elements that
-	     * are not currently visible on the screen.
-	     * 
-	     * This specific implementation scrolls the page to the bottom (scrolling by the height of the document).
-	     * 
-	     * @param driver The WebDriver instance that controls the browser.
-	     * 
-	     * @return None
-	     * @throws NullPointerException If the {@code driver} is {@code null}.
-	     */
-	    public static void scrollBy(WebDriver driver) throws NullPointerException{
-	    	JavascriptExecutor js = (JavascriptExecutor) driver;
-	    	js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-	    } 
+	  
+/**
+ * Scrolls the window by a specified amount (by default scrolls to the bottom of the page).
+ * 
+ * @param driver The WebDriver instance.
+ * @return None
+ */
+public static void scrollBy(WebDriver driver) {
+    if (driver == null) {
+        System.err.println("WebDriver is null. Cannot perform scroll operation.");
+        return; // Avoid further execution if driver is null
+    }
+
+    try {
+        // Execute JavaScript to scroll the window
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)"); // Scrolls down by the height of the page
+        System.out.println("Scrolled to the bottom of the page.");
+    } catch (Exception e) {
+        // Handle any potential exceptions during JavaScript execution
+        System.err.println("Error occurred while scrolling: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
 	    
-	    /**
-	     * Retrieves the title of the current webpage using JavaScript execution.
-	     * 
-	     * This method executes JavaScript to get the title of the current webpage. The title is retrieved from the 
-	     * document's title property and returned as a string. This can be used for verification purposes in automated 
-	     * testing, logging, or any situation where the page title needs to be captured.
-	     * 	   
-	     * @param driver The WebDriver instance controlling the browser.
-	     * 
-	     * @return The title of the current webpage as a string.
-	     * 
-	     * @throws NullPointerException If the {@code driver} is {@code null}.
-	     */
 	    
-	    public static String getPageTitle(WebDriver driver) throws NullPointerException {
-	    	JavascriptExecutor js = (JavascriptExecutor)driver;
-	    	String pageText =  js.executeScript("return document.title;").toString();
-	    	return pageText;
-	    }
+/**
+ * Retrieves the title of the current web page using JavaScript.
+ * 
+ * @param driver The WebDriver instance.
+ * @return The title of the current web page.
+ */
+public static String getPageTitle(WebDriver driver) {
+    if (driver == null) {
+        System.err.println("WebDriver is null. Cannot retrieve the page title.");
+        return null; // Avoid further execution if driver is null
+    }
+
+    try {
+        // Execute JavaScript to get the document title
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String pageTitle = js.executeScript("return document.title;").toString();
+        System.out.println("Page Title: " + pageTitle); // Optional: log the page title
+        return pageTitle;
+    } catch (Exception e) {
+        // Handle any potential exceptions during JavaScript execution
+        System.err.println("Error occurred while retrieving the page title: " + e.getMessage());
+        e.printStackTrace();
+        return null;
+    }
+}
 	 
 }

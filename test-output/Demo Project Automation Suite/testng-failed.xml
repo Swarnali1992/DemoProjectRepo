@@ -11,6 +11,8 @@
       <class name="testAPI.RestAPITest">
         <methods>
           <include name="tearDown"/>
+          <include name="beforeTest"/>
+          <include name="afterMethod"/>
           <include name="setup"/>
           <include name="testGetUser"/>
         </methods>

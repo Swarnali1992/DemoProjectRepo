@@ -11,11 +11,12 @@
    <class name="testUI.EndToEndTest">
        <methods>
         <include name="verifyLogin" />
-        <include name="verifyAddProductToCart" />
+        <include name="verifySearchProductAndAddProductToCart" />
         <include name="verifyProductAddedToCart" />
         <include name="verifyCheckOutPageDetails" />
         <include name="verifyCheckOutOverviewPageDetails" />
-        </methods>
+        <include name="verifyUpdateValueInExcel" />
+       	</methods>
        </class>
      </classes>
   </test> <!-- Test -->

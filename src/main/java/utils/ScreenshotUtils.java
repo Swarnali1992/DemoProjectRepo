@@ -2,6 +2,9 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -20,13 +23,16 @@ public class ScreenshotUtils {
 	
 	// Method to take a screenshot
     public static void takeScreenshot(WebDriver driver, String screenshotName) {
-        // Take screenshot and store it as a file
+    	// Take screenshot and store it as a file
         File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         
-        // Define the destination file path
-        File destinationFile = new File(screenshotName + ".png");
-
+        // Generate a unique name for the screenshot based on current timestamp
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        
         try {
+        	  // Define the destination file path
+            File destinationFile = new File( (("C:\\Users\\user\\eclipse-workspace\\DemoProject\\screenshots\\")+screenshotName+"_"+timeStamp) + ".png");
+
             // Copy the screenshot to the destination file
             FileUtils.copyFile(screenshotFile, destinationFile);
             System.out.println("Screenshot saved to: " + destinationFile.getAbsolutePath());

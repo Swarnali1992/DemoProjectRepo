@@ -6,31 +6,10 @@
   <name>DemoProject</name>
   <description>DemoProject</description>
   <packaging>jar</packaging>
-  <properties>
-  <maven.compiler.source>17</maven.compiler.source>
-  <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <suiteFile>testng.xml</suiteFile>
-  </properties>
-  <build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M3</version>
-            <configuration>
-                <suiteXmlFiles>
-                    <suiteXmlFile>testng.xml</suiteXmlFile>
-                </suiteXmlFiles>
-            </configuration>
-        </plugin>
-            <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-clean-plugin</artifactId>
-            <version>3.2.0</version>
-</plugin>
-    </plugins>
-</build>
+ <properties>
+        <maven.compiler.source>1.8</maven.compiler.source> <!-- Set Java version -->
+        <maven.compiler.target>1.8</maven.compiler.target> <!-- Set Java version -->
+    </properties>
   <dependencies>
     <!--Selenium Dependency-->
     <dependency>
@@ -50,6 +29,14 @@
     <artifactId>mysql-connector-java</artifactId>
     <version>8.0.33</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+<dependency>
+    <groupId>com.microsoft.sqlserver</groupId>
+    <artifactId>mssql-jdbc</artifactId>
+    <version>12.8.1.jre11</version>
+</dependency>
+
+
  <!--TestNG Dependency-->
  <dependency>
  	<groupId>org.testng</groupId>
@@ -132,6 +119,45 @@
         <artifactId>jackson-databind</artifactId>
         <version>2.15.2</version>
     </dependency>
- </dependencies>
- 
+
+  <dependency>
+    <groupId>org.apache.maven.surefire</groupId>
+    <artifactId>surefire-api</artifactId>
+    <version>3.0.0-M6</version> <!-- Use the same version as the plugin -->
+    <scope>provided</scope>
+  </dependency>
+</dependencies>
+
+<build>
+    <plugins>
+        <!-- Surefire Plugin for Unit Tests -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M6</version>
+				<configuration>
+				<suiteXmlFiles>
+					<suiteXmlFile>testngUI.xml</suiteXmlFile>
+					
+				</suiteXmlFiles>
+				 </configuration>
+				
+        </plugin>
+
+			<!-- Failsafe Plugin for Integration Tests -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>3.0.0-M6</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>integration-test</goal>
+                        <goal>verify</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 </project>

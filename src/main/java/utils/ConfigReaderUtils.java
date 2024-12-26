@@ -31,21 +31,36 @@ public class ConfigReaderUtils {
 
 	    
 
-/**
- * Retrieves the value of a property from the loaded configuration.
- * 
- * This method fetches the value associated with the specified key from the {@link Properties} object. It assumes that the 
- * properties have been previously loaded (e.g., by calling {@link loadProperties(String)}). If the key does not exist, it returns 
- * {@code null} or can be customized to return a default value.
- * 
- * @param key The key of the property to be fetched from the configuration file.
- * @return The value associated with the specified key, or {@code null} if the key does not exist.
- * @throws IOException If the properties have not been loaded properly or the properties file was not found.
- * @throws RuntimeException If the properties have not been loaded or are unavailable when calling this method.
- */
-	    
-	    public static String getProperty(String key) throws IOException,RuntimeException{
-	        return properties.getProperty(key);
-	    }
+	    /**
+	     * Retrieves the value for a given key from the properties file.
+	     * If the key is not found, it returns null.
+	     * 
+	     * @param key The key for which the property value is to be retrieved.
+	     * @return The value associated with the key in the properties file, or null if the key is not found.
+	     * @throws RuntimeException if there is any error retrieving the property.
+	     */
+	    public static String getProperty(String key) throws IOException, RuntimeException {
+	        String value = null;
+	        try {
+	            value = properties.getProperty(key);
 
-}
+	            if (value == null) {
+	                throw new RuntimeException("Property not found for key: " + key);
+	            }
+	        } catch (NullPointerException e) {
+	            System.err.println("Error: NullPointerException while accessing the properties file.");
+	            e.printStackTrace();
+	            throw new RuntimeException("NullPointerException while accessing the properties file.", e);
+	        } catch (RuntimeException e) {
+	            System.err.println("Error: RuntimeException occurred while fetching property for key: " + key);
+	            e.printStackTrace();
+	            throw e;  // Rethrow the RuntimeException
+	        } catch (Exception e) {
+	            System.err.println("Unexpected error occurred while fetching property: " + e.getMessage());
+	            e.printStackTrace();
+	            throw new RuntimeException("Unexpected error occurred while fetching property.", e);
+	        }
+	        return value;
+	    }
+	}
+

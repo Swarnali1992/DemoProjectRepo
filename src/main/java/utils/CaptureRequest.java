@@ -34,7 +34,7 @@ public class CaptureRequest {
 	 */
 	
 public void captureHttpRequest(WebDriver driver, String browser) throws WebDriverException {
-	
+	try {
 	if(browser.equalsIgnoreCase("CHROME")){
 		devTools = ((ChromeDriver)driver).getDevTools();
 	}
@@ -49,11 +49,19 @@ public void captureHttpRequest(WebDriver driver, String browser) throws WebDrive
 	nh.captureNetworkRequest();
 	// Enable Network Tracking
     devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
-	
+    
+    //Capture Performance Metrics
+    PerformanceTracker performanceTracker = new PerformanceTracker(devTools);
+    performanceTracker.captureMetrics();
 	devTools.addListener(Network.requestWillBeSent(), request -> {
 //	System.out.println("Request URL: " + request.getRequest().getUrl());
 //	System.out.println("Request Method: " + request.getRequest().getMethod());
 	});
-	
+	}
+	catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		System.out.println(e.getMessage());
+  }
 }
 }

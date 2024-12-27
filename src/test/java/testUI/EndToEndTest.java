@@ -118,8 +118,7 @@ public class EndToEndTest extends BaseTest {
 			System.out.println(e.getMessage());
 	  }
 	 //swagLabsPage.clickOpenMenuIcon();
-	 //eleUtil.selectSubMenu("About"); 
-	}
+	 	}
 	
   
   /**
@@ -376,16 +375,16 @@ public class EndToEndTest extends BaseTest {
 			logger.info("Product ID is : " +result.getString(1));
 			logger.info("Product Name is : " +result.getString(2));
 			}
+		}
+			catch	(SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 			// Close the connection
 			DatabaseUtils.closeConnection(connection);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		    logger.info("Database connection closed successfully.");
+	
+	
 	}
-	
-	
-	
-	
 	
 }

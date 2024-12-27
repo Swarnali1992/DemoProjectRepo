@@ -44,28 +44,30 @@ public class DatabaseUtils {
 
     
     /**
-     * Executes the provided SQL query on the established database connection and returns the result.
+     * Executes a SQL query using the provided database connection and returns the resulting {@link ResultSet}.
+     *
+     * <p>This method checks if the provided {@link Connection} is valid and open. If the connection is closed or null, a {@link RuntimeException} is thrown.
+     * It then creates a {@link Statement} to execute the query and returns the result as a {@link ResultSet}.
      * 
-     * This method uses the  Statement object to execute a query that returns a result set (such as a `SELECT` query).
-     * It checks whether the database connection is established and open before attempting to execute the query. If the connection
-     * is not available or closed, it throws a {@link RuntimeException}. If an error occurs while executing the query, it throws
-     * a RuntimeException with the relevant error message.
-     * 
-     * @param query The SQL query string to be executed. Typically, this would be a `SELECT` query, but any valid SQL query can
-     *              be used.
-     * @return A ResultSet object containing the data returned by the query.
-     * @throws RuntimeException If the connection is not established or if an error occurs while executing the query.
-     * @throws SQLException If an error occurs while executing the SQL query, such as a syntax error or other database-related issue.
+     * <p>If there is an error during query execution, a {@link RuntimeException} is thrown with a relevant message.
+     *
+     * @param query The SQL query to be executed. The query must be a valid SQL query in string format.
+     * @param connection The {@link Connection} object representing the active database connection. 
+     *                   It cannot be null or closed.
+     * @return A {@link ResultSet} object containing the result of the executed query.
+     * @throws RuntimeException if the database connection is not established, or if the query execution fails.
      */
     
     // Execute a query and return the ResultSet
-    public static ResultSet executeQuery(String query) {
+    
+    public static ResultSet executeQuery(String query,Connection connection) throws RuntimeException {
         ResultSet resultSet = null;
         try {
             if (connection == null || connection.isClosed()) {
                 throw new RuntimeException("Database connection is not established.");
             }
-            Statement statement = connection.createStatement();
+         // Statement object to send the SQL statement to the Database
+    		 Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,21 +78,24 @@ public class DatabaseUtils {
 
     
     /**
-     * Closes the database connection if it is open.
+     * Closes the provided database {@link Connection} if it is open.
      * 
-     * This method checks whether the current database connection is valid (not null and open). 
-     * If the connection is open, it is closed using the Connection#close()} method. 
-     * After closing, a message is printed to indicate that the connection has been closed successfully.
-     * 
-     * If any error occurs during the process of closing the connection, the exception is caught 
-     * and its stack trace is printed for debugging purposes.
-     * 
+     * This method checks if the provided {@link Connection} is not {@code null} and is not already closed.
+     * If the connection is open, it is closed, and a success message is printed to the console.
+     * If an exception occurs during closing the connection, it is caught and printed, but no exception is thrown.
+     *
+     *
+     * @param connection The Connection object representing the active database connection to be closed.
+     *                   If the connection is {@code null} or already closed, it will not attempt to close it.
+     *                   If the connection is closed successfully, a success message is printed to the console
+     *                   If there is an issue while closing the connection, such as a network problem or invalid connection,
+     *                   the exception is caught and printed to the console.
+     * @throws RuntimeException if there is an issue while closing the connection, such as a network problem or invalid connection
      * @return None
-     * @throws SQLException If there is an error while closing the database connection.
      */
     
     // Close the database connection
-    public static void closeConnection() {
+    public static void closeConnection(Connection connection) {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();

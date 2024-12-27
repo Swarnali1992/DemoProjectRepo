@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Demo Project Automation Suite]" guice-stage="DEVELOPMENT">
-  <listeners>
-    <listener class-name="utils.SuiteListener"/>
-  </listeners>
-  <test thread-count="5" name="Test(failed)">
-    <parameter name="browser" value="chrome"/>
-    <parameter name="env" value="dev"/>
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testAPI.RestAPITest">
+      <class name="testUI.EndToEndTest">
         <methods>
-          <include name="tearDown"/>
           <include name="beforeTest"/>
+          <include name="verifyDB"/>
           <include name="afterMethod"/>
-          <include name="setup"/>
-          <include name="testGetUser"/>
+          <include name="verifyCheckOutPageDetails"/>
+          <include name="verifyCheckOutOverviewPageDetails"/>
+          <include name="afterTest"/>
+          <include name="beforeMethod"/>
+          <include name="verifySearchProductAndAddProductToCart"/>
+          <include name="verifyLogin"/>
+          <include name="verifyUpdateValueInExcel"/>
+          <include name="verifyProductAddedToCart"/>
         </methods>
-      </class> <!-- testAPI.RestAPITest -->
+      </class> <!-- testUI.EndToEndTest -->
     </classes>
-  </test> <!-- Test(failed) -->
-</suite> <!-- Failed suite [Demo Project Automation Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

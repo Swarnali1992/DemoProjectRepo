@@ -169,31 +169,31 @@ public class BaseTestAPI {
      * @param result The result of the test method execution, containing information about the test status.
      * @return None
      */
-//    @AfterMethod
-//    public void afterMethod(ITestResult result) {
-//    	System.out.println("After Method executing : " + result.getStatus());
-//        try {
-//            if(result.getStatus() == ITestResult.FAILURE) {
-//                logger.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " -- Test Case Failed", ExtentColor.RED));
-//                logger.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable() + " -- Test Case Failed", ExtentColor.RED));
-//                // Capture screenshot when test fails
-//                ScreenshotUtils.takeScreenshot(driver, result.getName() + "_Failure");
-//            }
-//            else if(result.getStatus() == ITestResult.SKIP) {
-//                logger.log(Status.SKIP, MarkupHelper.createLabel(result.getName() + " -- Test Case Skipped", ExtentColor.ORANGE));	
-//            }
-//            else if(result.getStatus() == ITestResult.SUCCESS) {
-//                logger.log(Status.PASS, MarkupHelper.createLabel(result.getName() + " -- Test Case Passed", ExtentColor.GREEN));
-//                System.out.println("Hello");
-//            }
-//        } catch (Exception e) {
-//            // Log any exceptions that occur in afterMethod
-//            System.err.println("An error occurred in afterMethod: " + e.getMessage());
-//            e.printStackTrace();
-//            // You can throw a RuntimeException to fail the test execution in case of an error during the after-method process
-//            throw new RuntimeException("Error in afterMethod execution", e);
-//        }
-//    }
+    @AfterMethod
+    public void afterMethod(ITestResult result) {
+    	System.out.println("After Method executing : " + result.getStatus());
+        try {
+            if(result.getStatus() == ITestResult.FAILURE) {
+                logger.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " -- Test Case Failed", ExtentColor.RED));
+                logger.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable() + " -- Test Case Failed", ExtentColor.RED));
+                // Capture screenshot when test fails
+                ScreenshotUtils.takeScreenshot(driver, result.getName() + "_Failure");
+            }
+            else if(result.getStatus() == ITestResult.SKIP) {
+                logger.log(Status.SKIP, MarkupHelper.createLabel(result.getName() + " -- Test Case Skipped", ExtentColor.ORANGE));	
+            }
+            else if(result.getStatus() == ITestResult.SUCCESS) {
+                logger.log(Status.PASS, MarkupHelper.createLabel(result.getName() + " -- Test Case Passed", ExtentColor.GREEN));
+                System.out.println("Hello");
+            }
+        } catch (Exception e) {
+            // Log any exceptions that occur in afterMethod
+            System.err.println("An error occurred in afterMethod: " + e.getMessage());
+            e.printStackTrace();
+            // You can throw a RuntimeException to fail the test execution in case of an error during the after-method process
+            throw new RuntimeException("Error in afterMethod execution", e);
+        }
+    }
 
     
     /**

@@ -2,6 +2,7 @@ package base;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -33,7 +34,11 @@ public static String dbName;
 public static String excelName; 
 public static String excelFilePath;
 public static String rowNum;
+public static String decodedDBUsername;
+public static String decodedDBPassword;
 CaptureRequest captureRequest = new CaptureRequest();
+
+
 /**
  * This method is executed before each test in the test suite. It sets up the WebDriver, 
  * loads configuration properties, initializes Extent Reports, and prepares the test environment.
@@ -91,23 +96,42 @@ public void beforeTest(String browser, String env) throws Exception {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(2000, TimeUnit.SECONDS);
 
-        // Load other properties
-        dbName = ConfigReaderUtils.getProperty("database");
+        // Load Database properties
+        dbName = ConfigReaderUtils.getProperty("databaseName");
         System.out.println("Database Name: " + dbName);
 
+        // Load Excel properties
         excelName = ConfigReaderUtils.getProperty("excelfilename");
         System.out.println("Test Data retrieved from Excel: " + excelName);
 
+        // Load Excel file path
         excelFilePath = ConfigReaderUtils.getProperty("excelfilepath");
         System.out.println("Test Data Excel is stored in the path: " + excelFilePath);
 
+        // Load Excel row number
         rowNum = ConfigReaderUtils.getProperty("excelrownum");
         System.out.println("Test Data should be fetched from row number: " + rowNum);
 
+        
+        // Retrieve the encoded username and password from the config file
+        String encodedUsername = ConfigReaderUtils.getProperty("encodedDBUsername");
+        String encodedPassword = ConfigReaderUtils.getProperty("encodedDBPassword");
+        
+        // Decode the username and password of Database
+        decodedDBUsername = new String(Base64.getDecoder().decode(encodedUsername));
+        decodedDBPassword = new String(Base64.getDecoder().decode(encodedPassword));
+        
+        // Decode and print the username and password
+        System.out.println("Decoded Username for Database : " + new String(Base64.getDecoder().decode(encodedUsername)));
+        System.out.println("Decoded Password for Database : " + new String(Base64.getDecoder().decode(encodedPassword)));
+        
         // Setup extent report
         try {
-            sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + File.separator + "reportsapi" + File.separator + "DemoProject");
-           
+            sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + File.separator + "reports" + File.separator + "DemoProject");
+        	sparkReporter.config().setDocumentTitle("Automation Report of Demo Project");
+        	sparkReporter.config().setReportName("UI Funcational Testing");
+        	sparkReporter.config().setTheme(Theme.DARK);
+        
             extent = new ExtentReports();
             extent.attachReporter(sparkReporter);
 
@@ -134,7 +158,7 @@ public void beforeTest(String browser, String env) throws Exception {
  * and captures HTTP requests. Additionally, it prints the test method name to the console.
  * 
  *	The method accepts the following parameters:
- * 
+ * ExtentReporters
  *     testMethod: The test method being executed.
  *     browser: The browser type (e.g., "chrome", "firefox") to initialize the WebDriver.
  *     env: The environment (e.g., "prod", "dev") for which the properties are loaded.
@@ -150,7 +174,7 @@ public void beforeTest(String browser, String env) throws Exception {
  */
 @BeforeMethod
 @Parameters({"browser", "env"})
-public void beforeMethod(Method testMethod, String browser, String env) {
+public void beforeMethod(Method testMethod, String browser, String env) throws Exception {
     try {
         // Initialize logger for the test method in ExtentReports
         logger = extent.createTest(testMethod.getName());
@@ -218,11 +242,9 @@ public void setUpDriver(String browser) throws WebDriverException {
  * @return None
  */
 @AfterMethod
-public void afterMethod(ITestResult result) {
+public void afterMethod(ITestResult result) throws Exception {
     try {
-    	
-    	System.out.println("After Method executing" + result.getStatus());
-        if(result.getStatus() == ITestResult.FAILURE) {
+    	if(result.getStatus() == ITestResult.FAILURE) {
             logger.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " -- Test Case Failed", ExtentColor.RED));
             logger.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable() + " -- Test Case Failed", ExtentColor.RED));
             // Capture screenshot when test fails
@@ -254,7 +276,7 @@ public void afterMethod(ITestResult result) {
  * @return None
  */
 @AfterTest
-public void afterTest() {
+public void afterTest() throws Exception {
     try {
         // Close the browser and end the WebDriver session
         if (driver != null) {

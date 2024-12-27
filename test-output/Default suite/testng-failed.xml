@@ -5,15 +5,16 @@
     <classes>
       <class name="testUI.EndToEndTest">
         <methods>
-          <include name="afterMethod"/>
           <include name="beforeTest"/>
+          <include name="verifyDB"/>
+          <include name="afterMethod"/>
           <include name="verifyCheckOutPageDetails"/>
           <include name="verifyCheckOutOverviewPageDetails"/>
           <include name="afterTest"/>
           <include name="beforeMethod"/>
-          <include name="db"/>
           <include name="verifySearchProductAndAddProductToCart"/>
           <include name="verifyLogin"/>
+          <include name="verifyUpdateValueInExcel"/>
           <include name="verifyProductAddedToCart"/>
         </methods>
       </class> <!-- testUI.EndToEndTest -->

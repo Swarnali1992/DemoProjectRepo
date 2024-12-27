@@ -8,15 +8,15 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="env" value="dev"/>
     <classes>
-      <class name="testAPI.RestAPITest">
+      <class name="testUI.EndToEndTest">
         <methods>
-          <include name="tearDown"/>
           <include name="beforeTest"/>
+          <include name="verifyDB"/>
           <include name="afterMethod"/>
-          <include name="setup"/>
-          <include name="testGetUser"/>
+          <include name="afterTest"/>
+          <include name="beforeMethod"/>
         </methods>
-      </class> <!-- testAPI.RestAPITest -->
+      </class> <!-- testUI.EndToEndTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Demo Project Automation Suite] -->

@@ -181,7 +181,7 @@ public class LoginPageEvent {
 		
 	        // Row 2 (0-based index, so it's row 1 in the Excel file) and Column 3 (which is column 2, 0-based index)
 	        int rowNum = 1;  // Row 2 (0-based index)
-	        int colNum = 2;  // Column 3 (0-based index)
+	        int colNum = 3;  // Column 3 (0-based index)
 
 	        // The value you want to write
 	        String value = "Logged in as " + username;

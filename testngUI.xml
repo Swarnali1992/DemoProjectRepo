@@ -16,6 +16,7 @@
         <include name="verifyCheckOutPageDetails" />
         <include name="verifyCheckOutOverviewPageDetails" />
         <include name="verifyUpdateValueInExcel" />
+        <include name="verifyDatabaseResult"/>
        	</methods>
        </class>
      </classes>

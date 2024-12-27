@@ -57,6 +57,7 @@ public class EndToEndTest extends BaseTest {
   @Test(priority=0)
   public void verifyLogin() throws InterruptedException, IOException {
 	  try {
+		  logger.info("Verify Login Page is displayed");
 	  logger.info("Login Page is displayed");
 	  // fetch login username and password from Test Data Excel
 	  loginPage.fetchLoginData();
@@ -94,6 +95,7 @@ public class EndToEndTest extends BaseTest {
   
   @Test(priority=1)
 	public void verifySearchProductAndAddProductToCart() throws Exception {
+	  logger.info("Verify Product Search and Add Product to Cart");	
 	  //Verify login success
 	 swagLabsPage.verifyLoginSuccessful();
 	 logger.info("User logged in successfully.");
@@ -142,6 +144,7 @@ public class EndToEndTest extends BaseTest {
 	public void verifyProductAddedToCart() throws InterruptedException {
 		String message = "Same Product not added to Cart.";
 		try {
+			logger.info("Verify Product added to Cart");
 			logger.info("Search for the added Product in the Cart page.");
 			//fetch the product title in cart in Cart page
 			String productInCartPageTitle = cartPage.productInCart(driver);
@@ -185,6 +188,7 @@ public class EndToEndTest extends BaseTest {
 		String expectedPageTitle = "Checkout: Your Information";
 		String message = "Checkout: Your Information Page is not getting displayed.";
 		try {
+			logger.info("Verify Checkout Page is displayed");
 			//fetch page title
 		String actualPageTitle = checkoutPage.getCheckoutPageTitle();
 		logger.info("Page displayed : " +actualPageTitle);
@@ -201,7 +205,7 @@ public class EndToEndTest extends BaseTest {
 		checkoutPage.clickContinueBtn();
 		logger.info("Clicked on Continue button."); 
 		logger.info("Navigate to Checkout Overview page."); 
-		CaptureRequest cp = new CaptureRequest();
+//		CaptureRequest cp = new CaptureRequest();
 //		PerformanceTracker pT = new PerformanceTracker(cp.devTools);
 //		pT.captureMetrics();
 //		System.out.println();
@@ -242,6 +246,7 @@ public class EndToEndTest extends BaseTest {
 		String expectedPageTitle = "Checkout: Overview";
 		String message = "Checkout Overview Page is not getting displayed.";
 		try {
+			logger.info("Verify Checkout Overview Page is displayed");
 			//fetch page title
 		String actualPageTitle = checkoutOverviewPage.getPageTitle();
 		logger.info("Page Displayed : " +actualPageTitle);
@@ -305,5 +310,82 @@ public class EndToEndTest extends BaseTest {
 		}
 	}
 	
-     	
+	/**
+	 * This test method verifies the results of a database query by fetching data from the "Product" table.
+	 * It connects to a SQL Server database, executes a query, retrieves the results, and prints the data.
+	 *
+	 * Steps performed in this method:
+	 * 
+	 *     Loads the SQL Server JDBC driver.
+	 *     Establishes a connection to the database using the provided connection string.
+	 *     Executes a SQL query to retrieve all records from the "Product" table.
+	 *     Iterates through the result set and prints the Product ID and Product Name of each record.
+	 *     Closes the database connection after the operation.
+	 * <
+	 * 
+	 * This method is annotated with {@code @Test(priority=6)} to indicate that it is a part of the test suite, and its execution priority is 6.
+	 * 
+	 * @throws InterruptedException If the thread is interrupted while waiting (though not used in this method).
+	 * @throws ClassNotFoundException If the SQL Server JDBC driver class is not found.
+	 * @throws SQLException If an error occurs while interacting with the database.
+	 * 
+	 * @return None
+	 */
+	
+	@Test(priority=6)
+	public void verifyDatabaseResult() throws InterruptedException, ClassNotFoundException, SQLException {
+		Connection connection = null;
+		String query = "select * from Product";
+		try {
+		//DB connection
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		logger.info("Verify DB Connection");
+	
+		String dbURL = "jdbc:sqlserver://localhost:1433;";
+		String connectionString = dbURL + "databaseName=" + dbName  + ";encrypt=true;trustServerCertificate=true" +";user=" + decodedDBUsername + ";password=" + decodedDBPassword;
+		//System.out.println(connectionString);
+		  
+		// Establish connection to SQL Server
+		connection = DriverManager.getConnection(connectionString);
+		
+		//System.out.println("Connected to SQL Server successfully!");
+		logger.info("Connected to SQL Server successfully!");
+	    System.out.println("Connected to SQL Server successfully!");
+	
+      }
+			catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		//  Get the contents of Product table from DB	
+			ResultSet result = DatabaseUtils.executeQuery(query,connection);
+			logger.info("Fetched results of the query from DB : " +query);
+			System.out.println("Fetched results of query from DB.");
+			
+		// Print the result until all the records are printed
+		// res.next() returns true if there is any next record else returns false
+		try {
+			while (result.next())
+			{
+			System.out.println("The Product ID is : " +result.getString(1));
+			System.out.println("The Product Name is : " + result.getString(2));
+			logger.info("Product ID is : " +result.getString(1));
+			logger.info("Product Name is : " +result.getString(2));
+			}
+			// Close the connection
+			DatabaseUtils.closeConnection(connection);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
 }
